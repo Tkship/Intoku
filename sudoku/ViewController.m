@@ -106,6 +106,7 @@
 - (void) createGridView {
     UIView* gridview = _gridview = [UIView new];
     
+    
     CGRect rect = self.view.frame;
     rect.size.width -= 20;
     rect.size.width = rect.size.height / 2 < rect.size.width ? rect.size.height / 2 : rect.size.width;
