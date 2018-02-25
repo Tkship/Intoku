@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="go0-hB-4yX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="go0-hB-4yX">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Sudoku Final-->
         <scene sceneID="5EI-r1-bf9">
             <objects>
                 <viewController title="Sudoku Final" id="go0-hB-4yX" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jsk-W1-P16"/>
-                        <viewControllerLayoutGuide type="bottom" id="TDP-6g-ipV"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WAN-S9-35S">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="pWg-re-4vU"/>
                     </view>
                     <connections>
                         <segue destination="cZh-05-MUN" kind="showDetail" identifier="goToNewPage" id="Ona-vX-f0c"/>
@@ -34,58 +38,49 @@
         <scene sceneID="kpC-RN-Al8">
             <objects>
                 <viewController storyboardIdentifier="DemoNewGameViewController" id="cZh-05-MUN" customClass="DemoNewGameViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NX5-uF-4KG"/>
-                        <viewControllerLayoutGuide type="bottom" id="OJ0-JC-aUS"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SBm-u9-j4X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWM-nZ-Rkx">
-                                <rect key="frame" x="87" y="173" width="240" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="COMPLETED">
-                                        <attributes>
-                                            <font key="NSFont" size="34" name=".AppleSystemUIFont"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zI-yZ-Ekx">
-                                <rect key="frame" x="136" y="334" width="143" height="53"/>
-                                <color key="backgroundColor" red="0.94258779287338257" green="0.52090419035390989" blue="0.26912270556003498" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="New GAME">
-                                            <attributes>
-                                                <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <font key="NSFont" metaFont="system" size="17"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zI-yZ-Ekx">
+                                <rect key="frame" x="66.666666666666686" y="518.33333333333337" width="281" height="53"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.58039215686274503" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="281" id="3Af-DF-F9r"/>
+                                    <constraint firstAttribute="height" constant="53" id="9GT-nO-iGG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
+                                <state key="normal" title="NEW GAME">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="buttonTouchUp:" destination="cZh-05-MUN" eventType="touchUpInside" id="NjL-Cv-7LO"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Congraulations!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bn-7Q-wSR">
-                                <rect key="frame" x="125" y="144" width="154" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congraulations!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bn-7Q-wSR">
+                                <rect key="frame" x="133" y="168" width="148" height="24.666666666666657"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPLETED" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWM-nZ-Rkx">
+                                <rect key="frame" x="101.66666666666667" y="196.66666666666666" width="210.66666666666663" height="40.666666666666657"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6zI-yZ-Ekx" firstAttribute="centerX" secondItem="SBm-u9-j4X" secondAttribute="centerX" id="BbS-L8-OJv"/>
-                            <constraint firstItem="6zI-yZ-Ekx" firstAttribute="centerY" secondItem="SBm-u9-j4X" secondAttribute="centerY" id="XLO-jr-9RH"/>
+                            <constraint firstItem="aWM-nZ-Rkx" firstAttribute="top" secondItem="8bn-7Q-wSR" secondAttribute="bottom" constant="4" id="3Mg-Z7-5gc"/>
+                            <constraint firstItem="8bn-7Q-wSR" firstAttribute="top" secondItem="g05-p6-ln8" secondAttribute="top" constant="148" id="64R-AQ-MFJ"/>
+                            <constraint firstItem="6zI-yZ-Ekx" firstAttribute="top" secondItem="aWM-nZ-Rkx" secondAttribute="bottom" constant="281" id="6RM-nd-3b9"/>
+                            <constraint firstItem="6zI-yZ-Ekx" firstAttribute="centerX" secondItem="SBm-u9-j4X" secondAttribute="centerX" id="7g9-fu-t6r"/>
+                            <constraint firstItem="6zI-yZ-Ekx" firstAttribute="centerX" secondItem="g05-p6-ln8" secondAttribute="centerX" id="BbS-L8-OJv"/>
+                            <constraint firstItem="aWM-nZ-Rkx" firstAttribute="centerX" secondItem="SBm-u9-j4X" secondAttribute="centerX" id="KO2-GZ-fSa"/>
+                            <constraint firstItem="8bn-7Q-wSR" firstAttribute="centerX" secondItem="SBm-u9-j4X" secondAttribute="centerX" id="Rlz-e6-tmr"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="g05-p6-ln8"/>
                     </view>
                     <connections>
                         <outlet property="NewGamebtn" destination="6zI-yZ-Ekx" id="yj9-Ng-HBD"/>

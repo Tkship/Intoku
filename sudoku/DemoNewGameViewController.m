@@ -18,6 +18,16 @@
 @end
 
 @implementation DemoNewGameViewController
+
+-(void) viewDidLoad {
+    [super viewDidLoad];
+    self.NewGamebtn.layer.cornerRadius = 12;
+    self.NewGamebtn.layer.shadowOffset = CGSizeMake(0, 2);
+    self.NewGamebtn.layer.shadowColor = UIColor.blackColor.CGColor;
+    self.NewGamebtn.layer.masksToBounds = NO;
+    self.NewGamebtn.layer.shadowOpacity = 28/255;
+    
+}
 - (IBAction)buttonTouchUp:(id)sender {
     [self splashADDidRequest];
     //[self dismissViewControllerAnimated:YES completion:nil];
