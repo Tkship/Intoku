@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="ipad10_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -12,26 +12,34 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="beO-Oc-Jxd">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_bg" translatesAutoresizingMaskIntoConstraints="NO" id="kFw-XP-L02">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_logo" translatesAutoresizingMaskIntoConstraints="NO" id="dcX-SF-pPp">
+                    <rect key="frame" x="94" y="286" width="187" height="66"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="beO-Oc-Jxd" secondAttribute="trailing" id="2bd-2j-TKz"/>
-                <constraint firstItem="beO-Oc-Jxd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bbC-1Q-3hf"/>
-                <constraint firstAttribute="bottom" secondItem="beO-Oc-Jxd" secondAttribute="bottom" id="blo-XX-Rbu"/>
-                <constraint firstItem="beO-Oc-Jxd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fKf-4t-iqR"/>
+                <constraint firstItem="dcX-SF-pPp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="286" id="7uv-Ql-Q1s"/>
+                <constraint firstAttribute="trailing" secondItem="dcX-SF-pPp" secondAttribute="trailing" constant="94" id="AE2-4A-zTA"/>
+                <constraint firstItem="kFw-XP-L02" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ald-jA-aeL"/>
+                <constraint firstItem="kFw-XP-L02" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UvM-zf-P8Q"/>
+                <constraint firstAttribute="bottom" secondItem="dcX-SF-pPp" secondAttribute="bottom" constant="315" id="fff-B0-vgk"/>
+                <constraint firstItem="dcX-SF-pPp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="94" id="gVJ-m4-Mly"/>
+                <constraint firstAttribute="trailing" secondItem="kFw-XP-L02" secondAttribute="trailing" id="jkf-Ee-ep1"/>
+                <constraint firstAttribute="bottom" secondItem="kFw-XP-L02" secondAttribute="bottom" id="ns3-VW-lQ8"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="524" y="388"/>
+            <point key="canvasLocation" x="479.5" y="513.5"/>
         </view>
     </objects>
     <resources>
-        <image name="splash" width="752" height="1332"/>
+        <image name="launch_bg" width="375" height="667"/>
+        <image name="launch_logo" width="180" height="66"/>
     </resources>
 </document>
