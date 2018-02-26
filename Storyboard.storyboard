@@ -23,6 +23,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_bg" translatesAutoresizingMaskIntoConstraints="NO" id="zTO-JC-mi4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tub-q8-FCh">
                                 <rect key="frame" x="325" y="51" width="22" height="22"/>
                                 <state key="normal" image="icon_solve"/>
@@ -46,11 +49,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="zTO-JC-mi4" firstAttribute="trailing" secondItem="pWg-re-4vU" secondAttribute="trailing" id="0Nv-aK-jEc"/>
                             <constraint firstItem="tub-q8-FCh" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="6g0-5C-bd9"/>
                             <constraint firstItem="tub-q8-FCh" firstAttribute="leading" secondItem="9Pi-do-xHY" secondAttribute="trailing" constant="15" id="6j3-OY-ofB"/>
                             <constraint firstItem="bQI-rk-hXc" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="7Ke-r8-Onh"/>
+                            <constraint firstItem="zTO-JC-mi4" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" id="BzZ-ge-VlK"/>
                             <constraint firstItem="bQI-rk-hXc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pWg-re-4vU" secondAttribute="trailing" constant="-86" id="RK3-uX-OjS"/>
+                            <constraint firstItem="zTO-JC-mi4" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" id="Roi-iy-Gpd"/>
                             <constraint firstItem="tub-q8-FCh" firstAttribute="leading" secondItem="bQI-rk-hXc" secondAttribute="trailing" constant="10" id="j6p-qg-DDz"/>
+                            <constraint firstItem="zTO-JC-mi4" firstAttribute="bottom" secondItem="pWg-re-4vU" secondAttribute="bottom" id="kc7-9v-2nE"/>
                             <constraint firstItem="pWg-re-4vU" firstAttribute="trailing" secondItem="tub-q8-FCh" secondAttribute="trailing" constant="28" id="nTa-s4-79S"/>
                             <constraint firstItem="9Pi-do-xHY" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="52" id="nm2-SP-MEY"/>
                         </constraints>
@@ -128,6 +135,7 @@
     <resources>
         <image name="icon_hint" width="26" height="25"/>
         <image name="icon_solve" width="22" height="22"/>
+        <image name="launch_bg" width="375" height="667"/>
         <image name="resault_bg" width="375" height="667"/>
         <image name="resault_msg" width="306" height="171"/>
     </resources>

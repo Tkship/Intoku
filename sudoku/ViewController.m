@@ -17,7 +17,7 @@
  * The #define are here for educational purposes. I've used them to demonstrate the different aspects of programmatic UI
  * development.
  *
- * The game board consists of 81 cells that each contain a UILabel or UITextView. When a new puzzle is generated, if the
+ * The game board consists of 81 cells that each contain a UILabel or UITextView. When a new puzzle is generated, if thex
  * value of the puzzle cell is 0, a UITextView is used, otherwise a UILabel is used. This allows cells that immutable
  * in the puzzle to not be edited, while those that are mutable can be selected and have their values changed by the
  * user.
@@ -44,6 +44,15 @@
 #define ENABLE_TEXT_FILTERING
 #define SHOW_TOOLBAR
 #define ENABLE_ANIMATIONS
+
+static int SHOW_SPLASH_ADS = 0;
+static int TOTAL_CHECK_TIMES = 3;
+static int CHECK_STATUS_NORMAL = 0;
+static int CHECK_STATUS_SHOW_SPLASH_ADS = 1;
+static int CHECK_STATUS_COMPLETE = 2;
+int checkTime = 3;
+int checkingStatus = 0;
+Boolean backFromNewPage = false;
 
 @interface ViewController () <CERewardedVideoADDelegate>
 {
@@ -74,6 +83,7 @@
     SudokuGenerator * _generator;
 }
 
+
 /* The view controller loads all initial UI here */
 
 - (void)viewDidLoad {
@@ -101,7 +111,7 @@
 #endif*/
     
 #ifdef CHECK TIME
-    self.checkTimeView.text = @"3";
+    self.checkTimeView.text = [NSString stringWithFormat:@"%d",checkTime];
 #endif
      
 }
@@ -120,6 +130,7 @@
 
 - (void) createGridView {
     UIView* gridview = _gridview = [UIView new];
+    //gridview.layer.backgroundColor = [UIColor clearColor].CGColor;
     CGRect rect = self.view.frame;
     rect.size.width -= 27;
     rect.size.width = rect.size.height / 2 < rect.size.width ? rect.size.height / 2 : rect.size.width;
@@ -130,9 +141,10 @@
     rect.origin.y += 100;
 
     gridview.frame = rect;
-    gridview.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-    gridview.layer.borderColor = [UIColor blackColor].CGColor;
-    gridview.layer.borderWidth = 2;
+    gridview.backgroundColor = [UIColor whiteColor];
+    
+    //gridview.layer.borderColor = [UIColor blackColor].CGColor;
+    //gridview.layer.borderWidth = 2;
     
     [self.view addSubview:gridview];
 
@@ -194,15 +206,6 @@
     }];
 #endif
 }
-
-static int SHOW_SPLASH_ADS = 0;
-static int TOTAL_CHECK_TIMES = 3;
-static int CHECK_STATUS_NORMAL = 0;
-static int CHECK_STATUS_SHOW_SPLASH_ADS = 1;
-static int CHECK_STATUS_COMPLETE = 2;
-int checkTime = 3;
-int checkingStatus = 0;
-Boolean backFromNewPage = false;
 
 
 - (void) validateGrid {
@@ -276,7 +279,8 @@ Boolean backFromNewPage = false;
             label.frame = rect;
             
             //set up the colors for the grid item
-            label.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            //label.layer.borderColor = [UIColor colorWithRed:244/255 green:244/255 blue:244/255 alpha:1.0].CGColor;
+            label.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
             label.layer.borderWidth = 2;
 
             //add the grid item to the parent gridview
@@ -293,6 +297,8 @@ Boolean backFromNewPage = false;
     label.text = pos.value.stringValue;
     label.textColor = [UIColor darkGrayColor];
     label.backgroundColor = [UIColor whiteColor];
+    label.layer.cornerRadius = 4;
+    //self.NewGamebtn.layer.cornerRadius = 12;
     return label;
 }
 
@@ -301,7 +307,8 @@ Boolean backFromNewPage = false;
     UITextField* label = [UITextField new];
     if (pos.value.integerValue != 0)
         label.text = pos.value.stringValue;
-    
+    label.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    label.layer.cornerRadius = 4;
 #ifndef TEXT_COLOR
     label.textColor = [UIColor darkGrayColor];
 #else
@@ -330,28 +337,28 @@ Boolean backFromNewPage = false;
     
     rect = CGRectMake(0, sizeOfSquares * 3, sizeOfSquares * 9 + 2, 2);
     line.frame = rect;
-    line.layer.backgroundColor = [UIColor blackColor].CGColor;
+    line.layer.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0].CGColor;
     
     [_gridview addSubview:line];
     
     line = [UILabel new];
     rect = CGRectMake(0, sizeOfSquares * 6, sizeOfSquares * 9 + 2, 2);
     line.frame = rect;
-    line.layer.backgroundColor = [UIColor blackColor].CGColor;
+    line.layer.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0].CGColor;;
     
     [_gridview addSubview:line];
     
     line = [UILabel new];
     rect = CGRectMake(sizeOfSquares * 3, 0, 2, sizeOfSquares * 9 + 2);
     line.frame = rect;
-    line.layer.backgroundColor = [UIColor blackColor].CGColor;
+    line.layer.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0].CGColor;
     
     [_gridview addSubview:line];
     
     line = [UILabel new];
     rect = CGRectMake(sizeOfSquares * 6, 0, 2, sizeOfSquares * 9 + 2);
     line.frame = rect;
-    line.layer.backgroundColor = [UIColor blackColor].CGColor;
+    line.layer.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0].CGColor;
     
     [_gridview addSubview:line];
 
