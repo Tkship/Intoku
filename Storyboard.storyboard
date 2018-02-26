@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="go0-hB-4yX">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -21,29 +21,45 @@
             <objects>
                 <viewController title="Sudoku Final" id="go0-hB-4yX" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WAN-S9-35S">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_hint" translatesAutoresizingMaskIntoConstraints="NO" id="jqF-nX-UnD">
+                                <rect key="frame" x="284" y="51" width="26" height="25"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_solve" translatesAutoresizingMaskIntoConstraints="NO" id="xxH-tD-C7E">
+                                <rect key="frame" x="320" y="51" width="22" height="25"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jqF-nX-UnD" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="284" id="57J-0v-VX5"/>
+                            <constraint firstItem="xxH-tD-C7E" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="5KA-BY-Kyt"/>
+                            <constraint firstItem="jqF-nX-UnD" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="6kT-4A-Q0z"/>
+                            <constraint firstItem="xxH-tD-C7E" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="320" id="esd-BI-QcY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="pWg-re-4vU"/>
                     </view>
                     <connections>
+                        <outlet property="checkButton" destination="jqF-nX-UnD" id="b02-zv-t3y"/>
+                        <outlet property="solveButton" destination="xxH-tD-C7E" id="X0b-NP-1yn"/>
                         <segue destination="cZh-05-MUN" kind="showDetail" identifier="goToNewPage" id="Ona-vX-f0c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUX-tH-A7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-505" y="923"/>
+            <point key="canvasLocation" x="-506.39999999999998" y="922.16748768472905"/>
         </scene>
         <!--Demo New Game View Controller-->
         <scene sceneID="kpC-RN-Al8">
             <objects>
                 <viewController storyboardIdentifier="DemoNewGameViewController" id="cZh-05-MUN" customClass="DemoNewGameViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SBm-u9-j4X">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zI-yZ-Ekx">
-                                <rect key="frame" x="66.666666666666686" y="518.33333333333337" width="281" height="53"/>
+                                <rect key="frame" x="47" y="542.66666666666663" width="281" height="53"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.58039215686274503" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="281" id="3Af-DF-F9r"/>
@@ -58,13 +74,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congraulations!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bn-7Q-wSR">
-                                <rect key="frame" x="133" y="168" width="148" height="24.666666666666657"/>
+                                <rect key="frame" x="113.66666666666669" y="192" width="148" height="24.666666666666657"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPLETED" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWM-nZ-Rkx">
-                                <rect key="frame" x="101.66666666666667" y="196.66666666666666" width="210.66666666666663" height="40.666666666666657"/>
+                                <rect key="frame" x="82" y="220.66666666666666" width="211" height="40.999999999999972"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="34"/>
                                 <nil key="textColor"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -91,4 +107,8 @@
             <point key="canvasLocation" x="330.43478260869568" y="914.67391304347836"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_hint" width="26" height="25"/>
+        <image name="icon_solve" width="22" height="22"/>
+    </resources>
 </document>

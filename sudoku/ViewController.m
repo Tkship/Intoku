@@ -108,13 +108,13 @@
     
     
     CGRect rect = self.view.frame;
-    rect.size.width -= 20;
+    rect.size.width -= 27;
     rect.size.width = rect.size.height / 2 < rect.size.width ? rect.size.height / 2 : rect.size.width;
     rect.size.width -= (int) rect.size.width % 9;
     rect.size.width += 2;
     rect.size.height = rect.size.width;
     rect.origin.x += (self.view.frame.size.width - rect.size.width) / 2;
-    rect.origin.y += 50;
+    rect.origin.y += 100;
     
     gridview.frame = rect;
     gridview.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
