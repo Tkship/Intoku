@@ -16,7 +16,8 @@
 /* The current Sudoku Puzzle */
 @property Puzzle * puzzle;
 @property (weak, nonatomic) IBOutlet UITextView *logTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *solveButton;
-@property (weak, nonatomic) IBOutlet UIImageView *checkButton;
+@property (weak, nonatomic) IBOutlet UIButton *clickButton;
+@property (weak, nonatomic) IBOutlet UIButton *solveButton;
+
 
 @end

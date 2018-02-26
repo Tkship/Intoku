@@ -23,37 +23,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_hint" translatesAutoresizingMaskIntoConstraints="NO" id="MDa-wK-nEW">
-                                <rect key="frame" x="284" y="51" width="28" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="Bzq-pd-FAU"/>
-                                    <constraint firstAttribute="width" constant="28" id="E8s-Pb-x1A"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_solve" translatesAutoresizingMaskIntoConstraints="NO" id="bmA-VQ-VTw">
-                                <rect key="frame" x="320" y="51" width="28" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="F4m-Dp-FzE"/>
-                                    <constraint firstAttribute="width" constant="28" id="v1T-nz-1cr"/>
-                                </constraints>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tub-q8-FCh">
+                                <rect key="frame" x="320" y="51" width="22" height="22"/>
+                                <state key="normal" image="icon_solve"/>
+                                <connections>
+                                    <action selector="showAnswerAction:" destination="go0-hB-4yX" eventType="touchUpInside" id="lld-Y0-4xU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQI-rk-hXc">
+                                <rect key="frame" x="284" y="51" width="26" height="25"/>
+                                <state key="normal" image="icon_hint"/>
+                                <connections>
+                                    <action selector="clickResultAction:" destination="go0-hB-4yX" eventType="touchUpInside" id="tyy-m7-XL9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="MDa-wK-nEW" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="HzU-bT-Rag"/>
-                            <constraint firstItem="bmA-VQ-VTw" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="XH0-1z-KUb"/>
-                            <constraint firstItem="MDa-wK-nEW" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="284" id="YGF-NJ-aro"/>
-                            <constraint firstItem="bmA-VQ-VTw" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="320" id="evp-4Z-JWz"/>
+                            <constraint firstItem="tub-q8-FCh" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="6g0-5C-bd9"/>
+                            <constraint firstItem="bQI-rk-hXc" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="284" id="ANn-Ni-NQB"/>
+                            <constraint firstItem="tub-q8-FCh" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="320" id="IW3-ZN-0le"/>
+                            <constraint firstItem="bQI-rk-hXc" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="l5p-8Y-ZKW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pWg-re-4vU"/>
                     </view>
                     <connections>
+                        <outlet property="clickButton" destination="bQI-rk-hXc" id="Tvr-eT-SVd"/>
+                        <outlet property="solveButton" destination="tub-q8-FCh" id="h17-jh-cTv"/>
                         <segue destination="cZh-05-MUN" kind="showDetail" identifier="goToNewPage" id="Ona-vX-f0c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUX-tH-A7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-505" y="923"/>
+            <point key="canvasLocation" x="-506.39999999999998" y="922.48875562218893"/>
         </scene>
         <!--Demo New Game View Controller-->
         <scene sceneID="kpC-RN-Al8">

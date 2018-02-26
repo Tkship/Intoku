@@ -96,17 +96,27 @@
     [self newPuzzle];
 #endif
 
-#ifdef SHOW_TOOLBAR
+/*#ifdef SHOW_TOOLBAR
     [self createToolbar];
-#endif
+#endif*/
      
+}
+
+- (IBAction)clickResultAction:(id)sender {
+    [self validateGrid];
+    if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
+        NSLog(@"-----------OHHHH");
+        [self splashADDidRequest];
+    }
+}
+
+- (IBAction)showAnswerAction:(id)sender {
+      [self rewardedVideoADDidRequest];
 }
 
 
 - (void) createGridView {
     UIView* gridview = _gridview = [UIView new];
-    
-    
     CGRect rect = self.view.frame;
     rect.size.width -= 27;
     rect.size.width = rect.size.height / 2 < rect.size.width ? rect.size.height / 2 : rect.size.width;
@@ -115,7 +125,7 @@
     rect.size.height = rect.size.width;
     rect.origin.x += (self.view.frame.size.width - rect.size.width) / 2;
     rect.origin.y += 100;
-    
+
     gridview.frame = rect;
     gridview.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     gridview.layer.borderColor = [UIColor blackColor].CGColor;
@@ -138,7 +148,7 @@
 }
 
 
-- (void) createToolbar {
+/*- (void) createToolbar {
     UISegmentedControl * toolbar = _toolbar = [UISegmentedControl new];
     
     [toolbar insertSegmentWithTitle:@"Check" atIndex:0 animated:NO];
@@ -148,7 +158,7 @@
     toolbar.frame = CGRectMake(10, _gridview.frame.origin.y + _gridview.frame.size.height + 10, self.view.bounds.size.width - 20, 30);
     [self.view addSubview:toolbar];
 
-}
+}*/
 
 - (void) newPuzzle {
     [self newPuzzleWithSolution:nil];
@@ -363,9 +373,9 @@ Boolean backFromNewPage = false;
 #endif
 }
 
-
+/*
 - (void) buttonTouch: (UISegmentedControl*) control {
-    //UIActionSheet * menu = nil;
+    UIActionSheet * menu = nil;
     // Load ad stage
 
     NSLog(@"[intowowDemo] ViewController buttonTouch control.selectedSegmentIndex = %zd",control.selectedSegmentIndex);
@@ -379,7 +389,7 @@ Boolean backFromNewPage = false;
             break;
         case 1:
             [self rewardedVideoADDidRequest];
-            
+            break;
             //[self splashADDidRequest];
             //[self rewardedVideoADDidRequest];
 
@@ -389,12 +399,12 @@ Boolean backFromNewPage = false;
             //_bShowSolution = !_bShowSolution;
             //[_toolbar setTitle: _bShowSolution ? @"Hide" : @"Solve" forSegmentAtIndex:1];
 
-            /*for (UIView* view in _gridview.subviews)
-                [view removeFromSuperview];
+            //for (UIView* view in _gridview.subviews)
+               // [view removeFromSuperview];
 
-            [self layoutGrid:_bShowSolution ? self.puzzle.solution : self.puzzle.grid];
-            break;*/
-        /*case 2:
+            //[self layoutGrid:_bShowSolution ? self.puzzle.solution : self.puzzle.grid];
+            //break;
+        case 2:
             [self splashADDidRequest];
             
             //show level action sheet
@@ -436,12 +446,12 @@ Boolean backFromNewPage = false;
 
             [self showViewController:controller sender:self];
 
-        } break;*/
+        } break;
 
     }
     control.selectedSegmentIndex = -1;
 
-}
+}*/
 
 -(void)countdwonStart
 {
@@ -481,7 +491,7 @@ Boolean backFromNewPage = false;
 }
 
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+/*- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     //difficulty level was chosen
     PuzzleDifficulty difficulty = _difficulty;
 
@@ -502,7 +512,7 @@ Boolean backFromNewPage = false;
 
     if (difficulty != _difficulty)
         [self newPuzzleWithSolution:_puzzle.solution];
-}
+}*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
