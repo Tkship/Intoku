@@ -136,25 +136,24 @@ Boolean backFromNewPage = false;
     alertView = [[UIView alloc]initWithFrame:CGRectMake(48, 123, 295, 372)];
     [alertView setBackgroundColor:[UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1]];
     alertView.layer.cornerRadius = 24;
+    alertView.layer.position = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     
     
     textLabel = [[UILabel alloc]initWithFrame:CGRectMake(84, 202, 208, 47)];
     textLabel.layer.masksToBounds = TRUE;
     textLabel.text = [NSString stringWithFormat:@"Need help?"];
-    textLabel.textColor = [UIColor blackColor];
+    textLabel.textColor = [UIColor whiteColor];
     textLabel.font = [UIFont boldSystemFontOfSize:40];
     textLabel.textAlignment = NSTextAlignmentCenter;
-    //textLabel.layer.position = CGPointMake(self.view.frame.size.width/2, 100);
-    //self have to chanege[self.view addSubview:textLabel];
+    textLabel.layer.position = CGPointMake(alertView.frame.size.width/2, 125);
     
     remainCheck = [[UILabel alloc]initWithFrame:CGRectMake(121, 255, 133, 25)];
     remainCheck.layer.masksToBounds = TRUE;
     remainCheck.text = [NSString stringWithFormat:@"Hints left:%d",checkTime-1];
-    remainCheck.textColor = [UIColor blackColor];
+    remainCheck.textColor = [UIColor whiteColor];
     remainCheck.font = [UIFont boldSystemFontOfSize:22];
     remainCheck.textAlignment = NSTextAlignmentCenter;
-    //remainCheck.layer.position = CGPointMake(self.view.frame.size.width/2, 100);
-    //self have to chanege[self.view addSubview:remainCheck];
+    remainCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 160);
     
     [alertView addSubview:textLabel];
     [alertView addSubview:remainCheck];
