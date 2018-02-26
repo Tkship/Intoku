@@ -324,18 +324,19 @@ Boolean backFromNewPage = false;
             [gridview addSubview:label];
         }
     }
-
+    gridview.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
     //draw 4 views to represent grid lines
     [self drawGridLines: rect sizeOfSquares:(int) sizeOfSquares];
 }
 
-- (UILabel*) generateLabel: (Position*) pos {
-    UILabel* label = [UILabel new];
+- (UITextField*) generateLabel: (Position*) pos {
+    UITextField* label = [UITextField new];
     label.text = pos.value.stringValue;
-    label.textColor = [UIColor darkGrayColor];
-    label.backgroundColor = [UIColor whiteColor];
+    label.layer.backgroundColor = [UIColor whiteColor].CGColor;
     label.layer.cornerRadius = 4;
-    //self.NewGamebtn.layer.cornerRadius = 12;
+    label.textColor = [UIColor darkGrayColor];
+    label.userInteractionEnabled = NO;
+    
     return label;
 }
 
