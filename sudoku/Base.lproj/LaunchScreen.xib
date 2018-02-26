@@ -32,8 +32,9 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dcX-SF-pPp" secondAttribute="trailing" constant="94" id="AE2-4A-zTA"/>
                 <constraint firstItem="kFw-XP-L02" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ald-jA-aeL"/>
                 <constraint firstItem="kFw-XP-L02" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UvM-zf-P8Q"/>
-                <constraint firstAttribute="bottom" secondItem="dcX-SF-pPp" secondAttribute="bottom" constant="315" id="fff-B0-vgk"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dcX-SF-pPp" secondAttribute="bottom" constant="315" id="fff-B0-vgk"/>
                 <constraint firstItem="dcX-SF-pPp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="94" id="gVJ-m4-Mly"/>
+                <constraint firstItem="dcX-SF-pPp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iPe-Va-4ZM"/>
                 <constraint firstAttribute="trailing" secondItem="kFw-XP-L02" secondAttribute="trailing" id="jkf-Ee-ep1"/>
                 <constraint firstAttribute="bottom" secondItem="kFw-XP-L02" secondAttribute="bottom" id="ns3-VW-lQ8"/>
             </constraints>
