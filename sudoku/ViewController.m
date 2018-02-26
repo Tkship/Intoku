@@ -133,6 +133,11 @@ Boolean backFromNewPage = false;
 }
 
 - (void) setAlertWindow{
+    alertView = [[UIView alloc]initWithFrame:CGRectMake(48, 123, 295, 372)];
+    [alertView setBackgroundColor:[UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1]];
+    alertView.layer.cornerRadius = 24;
+    
+    
     textLabel = [[UILabel alloc]initWithFrame:CGRectMake(84, 202, 208, 47)];
     textLabel.layer.masksToBounds = TRUE;
     textLabel.text = [NSString stringWithFormat:@"Need help?"];
@@ -150,6 +155,10 @@ Boolean backFromNewPage = false;
     remainCheck.textAlignment = NSTextAlignmentCenter;
     //remainCheck.layer.position = CGPointMake(self.view.frame.size.width/2, 100);
     //self have to chanege[self.view addSubview:remainCheck];
+    
+    [alertView addSubview:textLabel];
+    [alertView addSubview:remainCheck];
+    [self.view addSubview:alertView];
 }
 
 - (IBAction)showAnswerAction:(id)sender {
