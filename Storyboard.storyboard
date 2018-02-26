@@ -22,7 +22,29 @@
                     <view key="view" contentMode="scaleToFill" id="WAN-S9-35S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_hint" translatesAutoresizingMaskIntoConstraints="NO" id="MDa-wK-nEW">
+                                <rect key="frame" x="284" y="51" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Bzq-pd-FAU"/>
+                                    <constraint firstAttribute="width" constant="28" id="E8s-Pb-x1A"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_solve" translatesAutoresizingMaskIntoConstraints="NO" id="bmA-VQ-VTw">
+                                <rect key="frame" x="320" y="51" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="F4m-Dp-FzE"/>
+                                    <constraint firstAttribute="width" constant="28" id="v1T-nz-1cr"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MDa-wK-nEW" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="HzU-bT-Rag"/>
+                            <constraint firstItem="bmA-VQ-VTw" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="XH0-1z-KUb"/>
+                            <constraint firstItem="MDa-wK-nEW" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="284" id="YGF-NJ-aro"/>
+                            <constraint firstItem="bmA-VQ-VTw" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="320" id="evp-4Z-JWz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="pWg-re-4vU"/>
                     </view>
                     <connections>
@@ -90,6 +112,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_hint" width="26" height="25"/>
+        <image name="icon_solve" width="22" height="22"/>
         <image name="resault_bg" width="375" height="667"/>
         <image name="resault_msg" width="306" height="171"/>
     </resources>
