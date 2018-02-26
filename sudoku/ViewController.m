@@ -138,25 +138,53 @@ Boolean backFromNewPage = false;
     alertView.layer.cornerRadius = 24;
     alertView.layer.position = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     
-    
     textLabel = [[UILabel alloc]initWithFrame:CGRectMake(84, 202, 208, 47)];
     textLabel.layer.masksToBounds = TRUE;
     textLabel.text = [NSString stringWithFormat:@"Need help?"];
     textLabel.textColor = [UIColor whiteColor];
     textLabel.font = [UIFont boldSystemFontOfSize:40];
     textLabel.textAlignment = NSTextAlignmentCenter;
-    textLabel.layer.position = CGPointMake(alertView.frame.size.width/2, 125);
+    textLabel.layer.position = CGPointMake(alertView.frame.size.width/2, 65);
     
     remainCheck = [[UILabel alloc]initWithFrame:CGRectMake(121, 255, 133, 25)];
     remainCheck.layer.masksToBounds = TRUE;
-    remainCheck.text = [NSString stringWithFormat:@"Hints left:%d",checkTime-1];
+    remainCheck.text = [NSString stringWithFormat:@"Hints left:%d",checkTime];
     remainCheck.textColor = [UIColor whiteColor];
     remainCheck.font = [UIFont boldSystemFontOfSize:22];
     remainCheck.textAlignment = NSTextAlignmentCenter;
-    remainCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 160);
+    remainCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 100);
+    
+    askCheck = [[UIButton alloc]initWithFrame:CGRectMake(95.5, 311, 184, 54)];
+    askCheck.layer.masksToBounds = TRUE;
+    askCheck.layer.cornerRadius = 12;
+    [askCheck setBackgroundColor: [UIColor whiteColor]];
+    [askCheck setTitleColor: [UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1] forState:UIControlStateNormal];
+    askCheck.titleLabel.font = [UIFont systemFontOfSize: 24];
+    if(checkTime > 1)
+    {
+        [askCheck setTitle: @"HINT" forState:UIControlStateNormal];
+    }
+    else if (checkTime == 1)
+    {
+        [askCheck setTitle: @"Watch ADs" forState:UIControlStateNormal];
+        //[self splashADDidRequest];
+    }
+    askCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 264);
+    
+    closeWindow = [[UIButton alloc]initWithFrame:CGRectMake(95.5, 384, 184, 54)];
+    closeWindow.layer.masksToBounds = TRUE;
+    closeWindow.layer.cornerRadius = 12;
+    [closeWindow setBackgroundColor: [UIColor whiteColor]];
+    [closeWindow setTitleColor: [UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1] forState:UIControlStateNormal];
+    closeWindow.titleLabel.font = [UIFont systemFontOfSize: 24];
+    [closeWindow setTitle:@"Close" forState:UIControlStateNormal];
+    closeWindow.layer.position = CGPointMake(alertView.frame.size.width/2, 324);
+    
     
     [alertView addSubview:textLabel];
     [alertView addSubview:remainCheck];
+    [alertView addSubview:askCheck];
+    [alertView addSubview:closeWindow];
     [self.view addSubview:alertView];
 }
 
