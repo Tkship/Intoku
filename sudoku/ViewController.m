@@ -99,13 +99,16 @@
 /*#ifdef SHOW_TOOLBAR
     [self createToolbar];
 #endif*/
+    
+#ifdef CHECK TIME
+    self.checkTimeView.text = @"3";
+#endif
      
 }
 
 - (IBAction)clickResultAction:(id)sender {
     [self validateGrid];
     if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
-        NSLog(@"-----------OHHHH");
         [self splashADDidRequest];
     }
 }
@@ -192,50 +195,44 @@
 #endif
 }
 
-static int SHOW_SPLASH_ADS = 3;
+static int SHOW_SPLASH_ADS = 0;
+static int TOTAL_CHECK_TIMES = 3;
 static int CHECK_STATUS_NORMAL = 0;
 static int CHECK_STATUS_SHOW_SPLASH_ADS = 1;
 static int CHECK_STATUS_COMPLETE = 2;
-int checkTime = 0;
+int checkTime = 3;
 int checkingStatus = 0;
 Boolean backFromNewPage = false;
 
 
 - (void) validateGrid {
-    checkTime ++;
+    checkTime --;
     Boolean isComplete = true;
     
     for (UIView* view in _gridview.subviews) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField * textField = (UITextField *) view;
             int tag = (int) view.tag;
-            NSLog(@"----------tag = %i", tag);
             UIColor * color = [_puzzle.grid positionAtIndex:tag].value.integerValue ==
                               [_puzzle.solution positionAtIndex:tag].value.integerValue ?
                 [UIColor blackColor] :
                 [UIColor redColor];
-            NSLog(@"----------[_puzzle.grid positionAtIndex:tag].value.integerValue = %i", [_puzzle.grid positionAtIndex:tag].value.integerValue);
-            NSLog(@"----------[solution positionAtIndex:tag].value.integerValue = %i", [_puzzle.solution positionAtIndex:tag].value.integerValue);
             if(!([_puzzle.grid positionAtIndex:tag].value.integerValue == [_puzzle.solution positionAtIndex:tag].value.integerValue) ||
                ([_puzzle.grid positionAtIndex:tag].value.integerValue == 0)) {
-                NSLog(@"----------1");
                    isComplete = false;
                }
             textField.textColor = color;
         }
     }
+    
+    [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
 
-    NSLog(@"----------validateGrid checkTime = %i", checkTime);
-    if(isComplete == true) {
-        NSLog(@"----------YAAAAA 1isComplete");
-    }
-    if(checkTime % SHOW_SPLASH_ADS == 0){
-        NSLog(@"----------YAAAAA validateGrid checkTime = %i", checkTime);
-        checkTime = checkTime % SHOW_SPLASH_ADS;
+    if(checkTime == SHOW_SPLASH_ADS){
+        checkTime = TOTAL_CHECK_TIMES;
         checkingStatus = CHECK_STATUS_SHOW_SPLASH_ADS;
+    } else {
+        checkingStatus = CHECK_STATUS_NORMAL;
     }
-    else checkingStatus = CHECK_STATUS_NORMAL;
-    NSLog(@"----------validateGrid checkTime = %i", checkTime);
     
 }
 
@@ -455,14 +452,14 @@ Boolean backFromNewPage = false;
 
 -(void)countdwonStart
 {
-    progress=[[UILabel alloc] initWithFrame:CGRectMake(80, 15, 100, 50)];
-    progress.textColor=[UIColor redColor];
+    progress = [[UILabel alloc] initWithFrame:CGRectMake(80, 15, 100, 50)];
+    progress.textColor = [UIColor redColor];
     [progress setText:@"Time : 0:05"];
-    progress.backgroundColor=[UIColor clearColor];
+    progress.backgroundColor = [UIColor clearColor];
     [self.view addSubview:progress];
-    currMinute=0;
-    currSeconds=05;
-    timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+    currMinute = 0;
+    currSeconds = 05;
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
 
 }
 -(void)timerFired
@@ -631,6 +628,7 @@ Boolean backFromNewPage = false;
 {
     
     [self appendLog:@"splash2ADDidVideoStart"];
+    [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
 }
 
 - (void) splash2ADWillDismiss:(nonnull CESplash2AD *)splash2AD

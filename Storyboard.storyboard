@@ -23,8 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tub-q8-FCh">
-                                <rect key="frame" x="320" y="51" width="22" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tub-q8-FCh">
+                                <rect key="frame" x="320" y="51" width="28" height="28"/>
                                 <state key="normal" image="icon_solve"/>
                                 <connections>
                                     <action selector="showAnswerAction:" destination="go0-hB-4yX" eventType="touchUpInside" id="lld-Y0-4xU"/>
@@ -37,17 +37,26 @@
                                     <action selector="clickResultAction:" destination="go0-hB-4yX" eventType="touchUpInside" id="tyy-m7-XL9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pi-do-xHY">
+                                <rect key="frame" x="300" y="52" width="6" height="12"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="9Pi-do-xHY" firstAttribute="leading" secondItem="WAN-S9-35S" secondAttribute="leading" constant="300" id="3N3-0A-b4s"/>
                             <constraint firstItem="tub-q8-FCh" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="6g0-5C-bd9"/>
-                            <constraint firstItem="bQI-rk-hXc" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="284" id="ANn-Ni-NQB"/>
+                            <constraint firstItem="bQI-rk-hXc" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="7Ke-r8-Onh"/>
                             <constraint firstItem="tub-q8-FCh" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="320" id="IW3-ZN-0le"/>
-                            <constraint firstItem="bQI-rk-hXc" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="51" id="l5p-8Y-ZKW"/>
+                            <constraint firstItem="9Pi-do-xHY" firstAttribute="top" secondItem="WAN-S9-35S" secondAttribute="top" constant="52" id="nm2-SP-MEY"/>
+                            <constraint firstItem="bQI-rk-hXc" firstAttribute="leading" secondItem="pWg-re-4vU" secondAttribute="leading" constant="284" id="xph-se-HjG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pWg-re-4vU"/>
                     </view>
                     <connections>
+                        <outlet property="checkTimeView" destination="9Pi-do-xHY" id="5kI-6N-fZQ"/>
                         <outlet property="clickButton" destination="bQI-rk-hXc" id="Tvr-eT-SVd"/>
                         <outlet property="solveButton" destination="tub-q8-FCh" id="h17-jh-cTv"/>
                         <segue destination="cZh-05-MUN" kind="showDetail" identifier="goToNewPage" id="Ona-vX-f0c"/>

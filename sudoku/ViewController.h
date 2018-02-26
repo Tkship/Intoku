@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *logTextView;
 @property (weak, nonatomic) IBOutlet UIButton *clickButton;
 @property (weak, nonatomic) IBOutlet UIButton *solveButton;
+@property (weak, nonatomic) IBOutlet UILabel *checkTimeView;
 
 
 @end
