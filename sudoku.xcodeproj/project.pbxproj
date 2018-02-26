@@ -25,6 +25,7 @@
 		BB5C3E6BF40B4570442BD5D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3889D68CD5D8C523E57E /* main.m */; };
 		BB5C3F01115874CD82D09205 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3BE1392EBF7B6114F9F6 /* ViewController.m */; };
 		BB5C3F432D6E3051674625D7 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C305E49C86B50FE4D0C12 /* Position.m */; };
+		C0ACE1FF2044595E001D511A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ACE1FE2044595E001D511A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		BB5C3C5054502FDEFD24FE2E /* SudokuGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudokuGenerator.m; sourceTree = "<group>"; };
 		BB5C3E977D5B21B559B95D42 /* Puzzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Puzzle.m; sourceTree = "<group>"; };
 		BB5C3F1EF9C18A80EC3BB031 /* SudokuGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudokuGenerator.h; sourceTree = "<group>"; };
+		C0ACE1FE2044595E001D511A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0ACE1FF2044595E001D511A /* QuartzCore.framework in Frameworks */,
 				A85A01EB203D783F007B2EC1 /* ce-premium-global-3.23.0.a in Frameworks */,
 				A85A01DE203D74A0007B2EC1 /* libcurses.tbd in Frameworks */,
 				A85A01DC203D748D007B2EC1 /* libsqlite3.tbd in Frameworks */,
@@ -99,6 +102,7 @@
 		A85A01AC203D5459007B2EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C0ACE1FE2044595E001D511A /* QuartzCore.framework */,
 				A85A01DD203D74A0007B2EC1 /* libcurses.tbd */,
 				A85A01DB203D748D007B2EC1 /* libsqlite3.tbd */,
 				A85A01D9203D747E007B2EC1 /* libz.tbd */,

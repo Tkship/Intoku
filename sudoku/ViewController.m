@@ -37,6 +37,8 @@
 #import "CERewardedVideoAD.h"
 #import "CESplash2AD.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #define SHOW_GRIDVIEW
 #define SHOW_PUZZLE
 #define SHOW_NUMBERS
@@ -71,6 +73,12 @@ Boolean backFromNewPage = false;
     NSTimer *timer;
     int currMinute;
     int currSeconds;
+    
+    UIView *alertView;
+    UILabel *textLabel;
+    UILabel *remainCheck;
+    UIButton *askCheck;
+    UIButton *closeWindow;
 }
 @end
 
@@ -110,13 +118,33 @@ Boolean backFromNewPage = false;
     [self createToolbar];
 #endif*/
     
-#ifdef CHECK TIME
+#ifdef CHECK_TIME
     self.checkTimeView.text = [NSString stringWithFormat:@"%d",checkTime];
 #endif
      
 }
 
 - (IBAction)clickResultAction:(id)sender {
+    textLabel = [[UILabel alloc]initWithFrame:CGRectMake(84, 202, 208, 47)];
+    textLabel.layer.masksToBounds = TRUE;
+    textLabel.text = [NSString stringWithFormat:@"Need help?"];
+    textLabel.textColor = [UIColor blackColor];
+    textLabel.font = [UIFont boldSystemFontOfSize:40];
+    textLabel.textAlignment = NSTextAlignmentCenter;
+    //textLabel.layer.position = CGPointMake(self.view.frame.size.width/2, 100);
+    [self.view addSubview:textLabel];
+    
+    remainCheck = [[UILabel alloc]initWithFrame:CGRectMake(121, 255, 133, 25)];
+    remainCheck.layer.masksToBounds = TRUE;
+    remainCheck.text = [NSString stringWithFormat:@"Hints left:%d",checkTime-1];
+    remainCheck.textColor = [UIColor blackColor];
+    remainCheck.font = [UIFont boldSystemFontOfSize:22];
+    remainCheck.textAlignment = NSTextAlignmentCenter;
+    //remainCheck.layer.position = CGPointMake(self.view.frame.size.width/2, 100);
+    [self.view addSubview:remainCheck];
+    
+    
+    
     [self validateGrid];
     if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
         [self splashADDidRequest];
