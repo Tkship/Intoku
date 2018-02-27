@@ -512,93 +512,16 @@ Boolean backFromNewPage = false;
 #endif
 }
 
-/*
-- (void) buttonTouch: (UISegmentedControl*) control {
-    UIActionSheet * menu = nil;
-    // Load ad stage
-
-    NSLog(@"[intowowDemo] ViewController buttonTouch control.selectedSegmentIndex = %zd",control.selectedSegmentIndex);
-    switch (control.selectedSegmentIndex) {
-        case 0:
-            [self validateGrid];
-            if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
-                NSLog(@"-----------OHHHH");
-                [self splashADDidRequest];
-            }
-            break;
-        case 1:
-            [self rewardedVideoADDidRequest];
-            break;
-            //[self splashADDidRequest];
-            //[self rewardedVideoADDidRequest];
-
-            // [self newPuzzle];
-            
-            
-            //_bShowSolution = !_bShowSolution;
-            //[_toolbar setTitle: _bShowSolution ? @"Hide" : @"Solve" forSegmentAtIndex:1];
-
-            //for (UIView* view in _gridview.subviews)
-               // [view removeFromSuperview];
-
-            //[self layoutGrid:_bShowSolution ? self.puzzle.solution : self.puzzle.grid];
-            //break;
-        case 2:
-            [self splashADDidRequest];
-            
-            //show level action sheet
-            menu = [UIActionSheet new];
-             
-             menu.title = @"Select Difficulty";
-             menu.delegate = self;
-             [menu addButtonWithTitle:@"Easy"];
-             [menu addButtonWithTitle:@"Medium"];
-             [menu addButtonWithTitle:@"Hard"];
-             
-             [menu showInView:self.view];
-            
-            break
-        case 3:
-            //new puzzle with the same solution
-            _bShowSolution = false;
-            [self newPuzzle];
-
-            break;
-        case 4: {
-            //show help
-            NSString* message =  @"To play, fill in all of the grey squares with a value between 1 to 9, while following this simple rule:\n\n";
-            message = [message stringByAppendingString:
-                @"Every horizontal row, vertical column and 3x3 box must contain all of the numbers 1 to 9 with no duplicates.\n\n"];
-            message = [message stringByAppendingString:
-                @"Use 'Check' to verify your progress. Use 'Easy', 'Medium' or 'Hard' to adjust the puzzle difficulty.\n"];
-            message = [message stringByAppendingString:
-                @"Use 'Solve' or 'Hide' to show and hide the puzzle solution. Use 'New' to generate a new puzzle.\n"];
-
-            UIAlertController *controller = [UIAlertController
-                alertControllerWithTitle:@"Help" message:message preferredStyle:UIAlertControllerStyleActionSheet];
-
-            UIAlertAction * action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * act) {
-                [controller dismissViewControllerAnimated:YES completion:nil];
-            }];
-
-            [controller addAction:action];
-
-            [self showViewController:controller sender:self];
-
-        } break;
-
-    }
-    control.selectedSegmentIndex = -1;
-
-}*/
-
 -(void)countdwonStart
 {
+<<<<<<< HEAD
     progress = [[UILabel alloc] initWithFrame:CGRectMake(80, 15, 100, 50)];
     progress.textColor = [UIColor redColor];
     //[progress setText:@"Time : 0:01"];
     progress.backgroundColor = [UIColor clearColor];
     [self.view addSubview:progress];
+=======
+>>>>>>> 4b5c60ff07802a44c773e41061f4522b868a4caa
     currMinute = 0;
     currSeconds = 01;
     timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
@@ -617,42 +540,20 @@ Boolean backFromNewPage = false;
         {
             currSeconds-=1;
         }
+<<<<<<< HEAD
         if(currMinute>-1)
             //[progress setText:[NSString stringWithFormat:@"%@%d%@%02d",@"Time : ",currMinute,@":",currSeconds]];
             NSLog(@"%@%d%@%02d",@"Time : ",currMinute,@":",currSeconds);
+=======
+>>>>>>> 4b5c60ff07802a44c773e41061f4522b868a4caa
     }
     else
     {
         backFromNewPage = true;
         [timer invalidate];
-        [progress removeFromSuperview];
         [self performSegueWithIdentifier:@"goToNewPage" sender:self];
     }
 }
-
-
-/*- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    //difficulty level was chosen
-    PuzzleDifficulty difficulty = _difficulty;
-
-    switch (buttonIndex) {
-        case 0:
-            _difficulty = PuzzleDifficultyEasy;
-            [_toolbar setTitle:@"Easy" forSegmentAtIndex:1];
-            break;
-        case 1:
-            _difficulty = PuzzleDifficultyMedium;
-            [_toolbar setTitle:@"Medium" forSegmentAtIndex:1];
-            break;
-        case 2:
-            _difficulty = PuzzleDifficultyHard;
-            [_toolbar setTitle:@"Hard" forSegmentAtIndex:1];
-            break;
-    }
-
-    if (difficulty != _difficulty)
-        [self newPuzzleWithSolution:_puzzle.solution];
-}*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -671,40 +572,10 @@ Boolean backFromNewPage = false;
     [self appendLog:[NSString stringWithFormat:@"rewardedVideoADDidFail, error : %@", error.description]];;
 }
 
-- (void)rewardedVideoADDidClick:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidClick"];
-}
-
-- (void)rewardedVideoADDidMute:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidMute"];
-}
-
-- (void)rewardedVideoADDidUnmute:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidUnmute"];
-}
-
 - (void)rewardedVideoADDidVideoStart:(CERewardedVideoAD *)rewardedVideoAD
 {
     [AudioPlayHandler pauseBackgroundMusic];
     [self appendLog:@"rewardedVideoADDidVideoStart"];
-}
-
-- (void)rewardedVideoADDidRewardUser:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidRewardUser"];
-}
-
-- (void)rewardedVideoADDidVideoEnd:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidVideoEnd"];
-}
-
-- (void)rewardedVideoADWillDisplay:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADWillDisplay"];
 }
 
 - (void) rewardedVideoADWillDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
@@ -718,15 +589,20 @@ Boolean backFromNewPage = false;
     
     /*
     [self layoutGrid:self.puzzle.solution];
+<<<<<<< HEAD
     [self countdwonStart];
     */
     
+=======
+    // [self countdwonStart];
+>>>>>>> 4b5c60ff07802a44c773e41061f4522b868a4caa
     [self appendLog:@"rewardedVideoADWillDismiss"];
 }
 
 - (void) rewardedVideoADDidDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
 {
-    [self appendLog:@"rewardedVideoADDidDismiss"];
+    backFromNewPage = true;
+    [self performSegueWithIdentifier:@"goToNewPage" sender:self];
 }
 
 /*!
@@ -788,12 +664,6 @@ Boolean backFromNewPage = false;
     [self appendLog:@"splash2ADWillDismiss"];
 }
 
-- (void) splash2ADDidDismiss:(nonnull CESplash2AD *)splash2AD
-{
-    [self appendLog:@"splash2ADDidDismiss"];
-    //checkTime = TOTAL_CHECK_TIMES;
-}
-
 
 #ifdef ENABLE_TEXT_FILTERING
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -810,11 +680,9 @@ Boolean backFromNewPage = false;
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"--------- viewWillAppear");
     if(backFromNewPage) {
         backFromNewPage = !backFromNewPage;
         [self newPuzzle];
-        //[self splashADDidRequest];
     }
 }
 
