@@ -340,7 +340,7 @@ UITextField *postTextField;
             UIColor * color = [_puzzle.grid positionAtIndex:tag].value.integerValue ==
                               [_puzzle.solution positionAtIndex:tag].value.integerValue ?
                 [UIColor blackColor] :
-                [UIColor redColor];
+                [UIColor colorWithRed:0.97 green:0.58 blue:0.54 alpha:1.0];
             if(!([_puzzle.grid positionAtIndex:tag].value.integerValue == [_puzzle.solution positionAtIndex:tag].value.integerValue) ||
                ([_puzzle.grid positionAtIndex:tag].value.integerValue == 0)) {
                    isComplete = false;
@@ -427,16 +427,14 @@ UITextField *postTextField;
 #else
     //Change font size for editable text
     label.textColor = [UIColor blackColor];
-    UIFontDescriptor * fontD = [label.font.fontDescriptor
-                            fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold
-                            | UIFontDescriptorTraitItalic];
+    UIFontDescriptor * fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
     label.font = [UIFont fontWithDescriptor: fontD size:label.font.pointSize + 2];
 #endif
     
     label.keyboardType = UIKeyboardTypeNumberPad;
     label.clearsOnBeginEditing = true;
     label.delegate = self;
-
+    [[label valueForKey:@"textInputTraits"] setValue:[UIColor clearColor] forKey:@"insertionPointColor"];
     [label addTarget:self
               action:@selector(textFieldDidChange:)
     forControlEvents:UIControlEventEditingChanged];
