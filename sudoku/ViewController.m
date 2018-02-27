@@ -574,6 +574,7 @@ Boolean backFromNewPage = false;
 {
     backFromNewPage = true;
     [self performSegueWithIdentifier:@"goToNewPage" sender:self];
+    //[self performSegueWithIdentifier:@"goToNewPage" sender:self];
 }
 
 /*!
