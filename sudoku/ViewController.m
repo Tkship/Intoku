@@ -53,7 +53,6 @@ static int SHOW_SPLASH_ADS = 0;
 static int TOTAL_CHECK_TIMES = 3;
 static int CHECK_STATUS_NORMAL = 0;
 static int CHECK_STATUS_SHOW_SPLASH_ADS = 1;
-static int CHECK_STATUS_COMPLETE = 2;
 int checkTime = 3;
 int checkingStatus = 0;
 Boolean backFromNewPage = false;
@@ -71,7 +70,6 @@ Boolean backFromNewPage = false;
 
 @interface ViewController()
 {
-    UILabel *progress;
     NSTimer *timer;
     int currMinute;
     int currSeconds;
@@ -117,10 +115,6 @@ Boolean backFromNewPage = false;
 #ifdef SHOW_PUZZLE
     [self newPuzzle];
 #endif
-
-/*#ifdef SHOW_TOOLBAR
-    [self createToolbar];
-#endif*/
     
 #ifdef CHECK_TIME
     self.checkTimeView.text = [NSString stringWithFormat:@"%d",checkTime];
@@ -129,12 +123,7 @@ Boolean backFromNewPage = false;
 }
 
 - (IBAction)clickResultAction:(id)sender {
-    /*[self setAlertWindow];
-    //[self validateGrid];
-
-    /*if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
-        [self splashADDidRequest];
-    }*/
+    [self setAlertWindow];
 }
 
 - (void) setAlertWindow{
@@ -269,19 +258,6 @@ Boolean backFromNewPage = false;
     self.logTextView.text = [NSString stringWithFormat:@"%@  %@\n%@", [dateFtr stringFromDate:[NSDate date]], log, self.logTextView.text];
 }
 
-
-/*- (void) createToolbar {
-    UISegmentedControl * toolbar = _toolbar = [UISegmentedControl new];
-    
-    [toolbar insertSegmentWithTitle:@"Check" atIndex:0 animated:NO];
-    [toolbar insertSegmentWithTitle:@"Hint" atIndex:1 animated:NO];
-    [toolbar addTarget:self action:@selector(buttonTouch:) forControlEvents:UIControlEventValueChanged];
-    
-    toolbar.frame = CGRectMake(10, _gridview.frame.origin.y + _gridview.frame.size.height + 10, self.view.bounds.size.width - 20, 30);
-    [self.view addSubview:toolbar];
-
-}*/
-
 - (void) newPuzzle {
     [self newPuzzleWithSolution:nil];
 }
@@ -336,14 +312,6 @@ Boolean backFromNewPage = false;
     }
     
     [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
-    /*
-    if(checkTime == SHOW_SPLASH_ADS){
-        checkTime = TOTAL_CHECK_TIMES;
-        checkingStatus = CHECK_STATUS_SHOW_SPLASH_ADS;
-    } else {
-        checkingStatus = CHECK_STATUS_NORMAL;
-    }
-   */
 }
 
 - (void) layoutGrid: (Solution*) solutionToShow {
@@ -486,93 +454,8 @@ Boolean backFromNewPage = false;
 #endif
 }
 
-/*
-- (void) buttonTouch: (UISegmentedControl*) control {
-    UIActionSheet * menu = nil;
-    // Load ad stage
-
-    NSLog(@"[intowowDemo] ViewController buttonTouch control.selectedSegmentIndex = %zd",control.selectedSegmentIndex);
-    switch (control.selectedSegmentIndex) {
-        case 0:
-            [self validateGrid];
-            if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
-                NSLog(@"-----------OHHHH");
-                [self splashADDidRequest];
-            }
-            break;
-        case 1:
-            [self rewardedVideoADDidRequest];
-            break;
-            //[self splashADDidRequest];
-            //[self rewardedVideoADDidRequest];
-
-            // [self newPuzzle];
-            
-            
-            //_bShowSolution = !_bShowSolution;
-            //[_toolbar setTitle: _bShowSolution ? @"Hide" : @"Solve" forSegmentAtIndex:1];
-
-            //for (UIView* view in _gridview.subviews)
-               // [view removeFromSuperview];
-
-            //[self layoutGrid:_bShowSolution ? self.puzzle.solution : self.puzzle.grid];
-            //break;
-        case 2:
-            [self splashADDidRequest];
-            
-            //show level action sheet
-            menu = [UIActionSheet new];
-             
-             menu.title = @"Select Difficulty";
-             menu.delegate = self;
-             [menu addButtonWithTitle:@"Easy"];
-             [menu addButtonWithTitle:@"Medium"];
-             [menu addButtonWithTitle:@"Hard"];
-             
-             [menu showInView:self.view];
-            
-            break
-        case 3:
-            //new puzzle with the same solution
-            _bShowSolution = false;
-            [self newPuzzle];
-
-            break;
-        case 4: {
-            //show help
-            NSString* message =  @"To play, fill in all of the grey squares with a value between 1 to 9, while following this simple rule:\n\n";
-            message = [message stringByAppendingString:
-                @"Every horizontal row, vertical column and 3x3 box must contain all of the numbers 1 to 9 with no duplicates.\n\n"];
-            message = [message stringByAppendingString:
-                @"Use 'Check' to verify your progress. Use 'Easy', 'Medium' or 'Hard' to adjust the puzzle difficulty.\n"];
-            message = [message stringByAppendingString:
-                @"Use 'Solve' or 'Hide' to show and hide the puzzle solution. Use 'New' to generate a new puzzle.\n"];
-
-            UIAlertController *controller = [UIAlertController
-                alertControllerWithTitle:@"Help" message:message preferredStyle:UIAlertControllerStyleActionSheet];
-
-            UIAlertAction * action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * act) {
-                [controller dismissViewControllerAnimated:YES completion:nil];
-            }];
-
-            [controller addAction:action];
-
-            [self showViewController:controller sender:self];
-
-        } break;
-
-    }
-    control.selectedSegmentIndex = -1;
-
-}*/
-
 -(void)countdwonStart
 {
-    progress = [[UILabel alloc] initWithFrame:CGRectMake(80, 15, 100, 50)];
-    progress.textColor = [UIColor redColor];
-    [progress setText:@"Time : 0:01"];
-    progress.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:progress];
     currMinute = 0;
     currSeconds = 01;
     timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
@@ -591,41 +474,14 @@ Boolean backFromNewPage = false;
         {
             currSeconds-=1;
         }
-        if(currMinute>-1)
-            [progress setText:[NSString stringWithFormat:@"%@%d%@%02d",@"Time : ",currMinute,@":",currSeconds]];
     }
     else
     {
         backFromNewPage = true;
         [timer invalidate];
-        [progress removeFromSuperview];
         [self performSegueWithIdentifier:@"goToNewPage" sender:self];
     }
 }
-
-
-/*- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    //difficulty level was chosen
-    PuzzleDifficulty difficulty = _difficulty;
-
-    switch (buttonIndex) {
-        case 0:
-            _difficulty = PuzzleDifficultyEasy;
-            [_toolbar setTitle:@"Easy" forSegmentAtIndex:1];
-            break;
-        case 1:
-            _difficulty = PuzzleDifficultyMedium;
-            [_toolbar setTitle:@"Medium" forSegmentAtIndex:1];
-            break;
-        case 2:
-            _difficulty = PuzzleDifficultyHard;
-            [_toolbar setTitle:@"Hard" forSegmentAtIndex:1];
-            break;
-    }
-
-    if (difficulty != _difficulty)
-        [self newPuzzleWithSolution:_puzzle.solution];
-}*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -644,40 +500,10 @@ Boolean backFromNewPage = false;
     [self appendLog:[NSString stringWithFormat:@"rewardedVideoADDidFail, error : %@", error.description]];;
 }
 
-- (void)rewardedVideoADDidClick:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidClick"];
-}
-
-- (void)rewardedVideoADDidMute:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidMute"];
-}
-
-- (void)rewardedVideoADDidUnmute:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidUnmute"];
-}
-
 - (void)rewardedVideoADDidVideoStart:(CERewardedVideoAD *)rewardedVideoAD
 {
     [AudioPlayHandler pauseBackgroundMusic];
     [self appendLog:@"rewardedVideoADDidVideoStart"];
-}
-
-- (void)rewardedVideoADDidRewardUser:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidRewardUser"];
-}
-
-- (void)rewardedVideoADDidVideoEnd:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADDidVideoEnd"];
-}
-
-- (void)rewardedVideoADWillDisplay:(CERewardedVideoAD *)rewardedVideoAD
-{
-    [self appendLog:@"rewardedVideoADWillDisplay"];
 }
 
 - (void) rewardedVideoADWillDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
@@ -687,13 +513,16 @@ Boolean backFromNewPage = false;
     
     [AudioPlayHandler resumeBackgroundMusic];
     [self layoutGrid:self.puzzle.solution];
-    [self countdwonStart];
+    backFromNewPage = true;
+    [self performSegueWithIdentifier:@"goToNewPage" sender:self];
+    // [self countdwonStart];
     [self appendLog:@"rewardedVideoADWillDismiss"];
 }
 
 - (void) rewardedVideoADDidDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
 {
-    [self appendLog:@"rewardedVideoADDidDismiss"];
+    backFromNewPage = true;
+    [self performSegueWithIdentifier:@"goToNewPage" sender:self];
 }
 
 /*!
@@ -755,12 +584,6 @@ Boolean backFromNewPage = false;
     [self appendLog:@"splash2ADWillDismiss"];
 }
 
-- (void) splash2ADDidDismiss:(nonnull CESplash2AD *)splash2AD
-{
-    [self appendLog:@"splash2ADDidDismiss"];
-    //checkTime = TOTAL_CHECK_TIMES;
-}
-
 
 #ifdef ENABLE_TEXT_FILTERING
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -777,11 +600,9 @@ Boolean backFromNewPage = false;
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"--------- viewWillAppear");
     if(backFromNewPage) {
         backFromNewPage = !backFromNewPage;
         [self newPuzzle];
-        //[self splashADDidRequest];
     }
 }
 

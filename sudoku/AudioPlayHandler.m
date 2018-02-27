@@ -15,6 +15,7 @@
 @implementation AudioPlayHandler
 
 AVAudioPlayer *myAudioPlayer;
+
 + (void) playBackgroundMusic {
     //start a background sound
     NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"background_music" ofType: @"mp3"];
@@ -34,4 +35,8 @@ AVAudioPlayer *myAudioPlayer;
     if (myAudioPlayer != NULL) [myAudioPlayer play];
 }
 
++ (void) playButtonSound {
+    //stop a background sound
+    if (myAudioPlayer != NULL) [myAudioPlayer pause];
+}
 @end

@@ -16,4 +16,5 @@
 + (void) playBackgroundMusic;
 + (void) pauseBackgroundMusic;
 + (void) resumeBackgroundMusic;
+
 @end

@@ -31,9 +31,7 @@
 }
 - (IBAction)buttonTouchUp:(id)sender {
     [self splashADDidRequest];
-    //[self dismissViewControllerAnimated:YES completion:nil];
 }
-//- (void) _setViewDelegateContentOverlayInsetsAreClean: (id)sender {}
 
 /*!
  *
