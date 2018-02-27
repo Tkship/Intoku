@@ -573,8 +573,11 @@ Boolean backFromNewPage = false;
 - (void) rewardedVideoADDidDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
 {
     backFromNewPage = true;
+<<<<<<< HEAD
     [self performSegueWithIdentifier:@"goToNewPage" sender:self];
     //[self performSegueWithIdentifier:@"goToNewPage" sender:self];
+=======
+>>>>>>> 63e52cced73c5a0a4f6a50efef9f802d67afa488
 }
 
 /*!
