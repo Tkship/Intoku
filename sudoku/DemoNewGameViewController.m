@@ -7,6 +7,7 @@
 //
 
 #import "DemoNewGameViewController.h"
+#import "AudioPlayHandler.h"
 #import "CESplash2AD.h"
 
 @interface DemoNewGameViewController ()
@@ -59,13 +60,13 @@
 
 - (void) splash2ADDidVideoStart:(nonnull CESplash2AD *)splash2AD
 {
-    
+    [AudioPlayHandler pauseBackgroundMusic];
     [self appendLog:@"splash2ADDidVideoStart"];
 }
 
 - (void) splash2ADWillDismiss:(nonnull CESplash2AD *)splash2AD
 {
-    
+    [AudioPlayHandler resumeBackgroundMusic];
     [self appendLog:@"splash2ADWillDismiss"];
 }
 

@@ -8,14 +8,9 @@
 
 
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
-#import <AudioToolbox/AudioToolbox.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate> {
-    AVAudioPlayer *myAudioPlayer;
-}
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, retain) AVAudioPlayer *myAudioPlayer;
 
 @end

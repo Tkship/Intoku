@@ -36,6 +36,7 @@
 #import "SudokuGenerator.h"
 #import "CERewardedVideoAD.h"
 #import "CESplash2AD.h"
+#import "AudioPlayHandler.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -127,11 +128,11 @@ Boolean backFromNewPage = false;
 }
 
 - (IBAction)clickResultAction:(id)sender {
-    [self setAlertWindow];
+    /*[self setAlertWindow];
     //[self validateGrid];
     if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
         [self splashADDidRequest];
-    }
+    }*/
 }
 
 - (void) setAlertWindow{
@@ -554,11 +555,11 @@ Boolean backFromNewPage = false;
 {
     progress = [[UILabel alloc] initWithFrame:CGRectMake(80, 15, 100, 50)];
     progress.textColor = [UIColor redColor];
-    [progress setText:@"Time : 0:05"];
+    [progress setText:@"Time : 0:01"];
     progress.backgroundColor = [UIColor clearColor];
     [self.view addSubview:progress];
     currMinute = 0;
-    currSeconds = 05;
+    currSeconds = 01;
     timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
 
 }
@@ -645,6 +646,7 @@ Boolean backFromNewPage = false;
 
 - (void)rewardedVideoADDidVideoStart:(CERewardedVideoAD *)rewardedVideoAD
 {
+    [AudioPlayHandler pauseBackgroundMusic];
     [self appendLog:@"rewardedVideoADDidVideoStart"];
 }
 
@@ -668,6 +670,7 @@ Boolean backFromNewPage = false;
     for (UIView* view in _gridview.subviews)
         [view removeFromSuperview];
     
+    [AudioPlayHandler resumeBackgroundMusic];
     [self layoutGrid:self.puzzle.solution];
     [self countdwonStart];
     [self appendLog:@"rewardedVideoADWillDismiss"];
@@ -726,14 +729,14 @@ Boolean backFromNewPage = false;
 
 - (void) splash2ADDidVideoStart:(nonnull CESplash2AD *)splash2AD
 {
-    
+    [AudioPlayHandler pauseBackgroundMusic];
     [self appendLog:@"splash2ADDidVideoStart"];
     [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
 }
 
 - (void) splash2ADWillDismiss:(nonnull CESplash2AD *)splash2AD
 {
-
+    [AudioPlayHandler resumeBackgroundMusic];
     [self appendLog:@"splash2ADWillDismiss"];
 }
 

@@ -10,6 +10,8 @@
 		A81A3320203ED808004667FC /* DemoNewGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A81A331F203ED808004667FC /* DemoNewGameViewController.m */; };
 		A81BAD6920450C6B00456814 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A81BAD6820450C6B00456814 /* AVFoundation.framework */; };
 		A81BAD6D20450FA100456814 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A81BAD6C20450FA100456814 /* background.mp3 */; };
+		A81BAD6F204515F200456814 /* background_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A81BAD6E204515F100456814 /* background_music.mp3 */; };
+		A81BAD72204517B300456814 /* AudioPlayHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A81BAD71204517B300456814 /* AudioPlayHandler.m */; };
 		A85A01DA203D747E007B2EC1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A85A01D9203D747E007B2EC1 /* libz.tbd */; };
 		A85A01DC203D748D007B2EC1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A85A01DB203D748D007B2EC1 /* libsqlite3.tbd */; };
 		A85A01DE203D74A0007B2EC1 /* libcurses.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A85A01DD203D74A0007B2EC1 /* libcurses.tbd */; };
@@ -46,6 +48,9 @@
 		A81A331F203ED808004667FC /* DemoNewGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoNewGameViewController.m; sourceTree = "<group>"; };
 		A81BAD6820450C6B00456814 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A81BAD6C20450FA100456814 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		A81BAD6E204515F100456814 /* background_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background_music.mp3; sourceTree = "<group>"; };
+		A81BAD702045179D00456814 /* AudioPlayHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlayHandler.h; sourceTree = "<group>"; };
+		A81BAD71204517B300456814 /* AudioPlayHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlayHandler.m; sourceTree = "<group>"; };
 		A85A01D9203D747E007B2EC1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		A85A01DB203D748D007B2EC1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A85A01DD203D74A0007B2EC1 /* libcurses.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurses.tbd; path = usr/lib/libcurses.tbd; sourceTree = SDKROOT; };
@@ -151,6 +156,8 @@
 				BB5C3A156917011EBB907151 /* Position.h */,
 				BB5C3E977D5B21B559B95D42 /* Puzzle.m */,
 				BB5C306BE370BD1CF8322B69 /* Puzzle.h */,
+				A81BAD702045179D00456814 /* AudioPlayHandler.h */,
+				A81BAD71204517B300456814 /* AudioPlayHandler.m */,
 			);
 			path = sudoku;
 			sourceTree = "<group>";
@@ -159,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				A81BAD6C20450FA100456814 /* background.mp3 */,
+				A81BAD6E204515F100456814 /* background_music.mp3 */,
 				B3ECE8501A8B3ECD00CC07CB /* Storyboard.storyboard */,
 				BB5C34E9461EC977272699E3 /* Products */,
 				BB5C3219175B258915A9C8CD /* sudoku */,
@@ -289,6 +297,7 @@
 			files = (
 				BB5C3DE2C6CD624A84B55820 /* Images.xcassets in Resources */,
 				A81BAD6D20450FA100456814 /* background.mp3 in Resources */,
+				A81BAD6F204515F200456814 /* background_music.mp3 in Resources */,
 				BB5C3359C711A84FEFD85B1F /* LaunchScreen.xib in Resources */,
 				A85A01F1203D78AB007B2EC1 /* CrystalExpress.plist in Resources */,
 				B3ECE8511A8B3ECD00CC07CB /* Storyboard.storyboard in Resources */,
@@ -328,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB5C3E6BF40B4570442BD5D6 /* main.m in Sources */,
+				A81BAD72204517B300456814 /* AudioPlayHandler.m in Sources */,
 				BB5C34A2F6540ED55A9B0856 /* AppDelegate.m in Sources */,
 				BB5C3F01115874CD82D09205 /* ViewController.m in Sources */,
 				BB5C3D54A7D74566F806BD4C /* SudokuGenerator.m in Sources */,
