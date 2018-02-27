@@ -34,9 +34,7 @@
 }
 
 - (void) generate {
-
     //generate a partial solution based on the complete solution
-    NSLog(@"---------Puzzle generate start!");
     //number of cells to unassign based on the difficult setting, the more difficult, the more cells removed
     int numbersToRemove = _difficulty + arc4random_uniform(3);
 

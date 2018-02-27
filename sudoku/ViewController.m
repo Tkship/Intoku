@@ -514,14 +514,6 @@ Boolean backFromNewPage = false;
 
 -(void)countdwonStart
 {
-<<<<<<< HEAD
-    progress = [[UILabel alloc] initWithFrame:CGRectMake(80, 15, 100, 50)];
-    progress.textColor = [UIColor redColor];
-    //[progress setText:@"Time : 0:01"];
-    progress.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:progress];
-=======
->>>>>>> 4b5c60ff07802a44c773e41061f4522b868a4caa
     currMinute = 0;
     currSeconds = 01;
     timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
@@ -540,12 +532,6 @@ Boolean backFromNewPage = false;
         {
             currSeconds-=1;
         }
-<<<<<<< HEAD
-        if(currMinute>-1)
-            //[progress setText:[NSString stringWithFormat:@"%@%d%@%02d",@"Time : ",currMinute,@":",currSeconds]];
-            NSLog(@"%@%d%@%02d",@"Time : ",currMinute,@":",currSeconds);
-=======
->>>>>>> 4b5c60ff07802a44c773e41061f4522b868a4caa
     }
     else
     {
@@ -580,22 +566,7 @@ Boolean backFromNewPage = false;
 
 - (void) rewardedVideoADWillDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
 {
-    /*
-    for (UIView* view in _gridview.subviews)
-        [view removeFromSuperview];
-     */
-    
     [AudioPlayHandler resumeBackgroundMusic];
-    
-    /*
-    [self layoutGrid:self.puzzle.solution];
-<<<<<<< HEAD
-    [self countdwonStart];
-    */
-    
-=======
-    // [self countdwonStart];
->>>>>>> 4b5c60ff07802a44c773e41061f4522b868a4caa
     [self appendLog:@"rewardedVideoADWillDismiss"];
 }
 

@@ -54,7 +54,6 @@
         
         SolutionState state, prevState;
         [_solutionStack addObject:[solution copy]];
-        NSLog(@"---------SudokuGenerator Generate solution start!");
         do {
             prevState = state;
             state = [solution converge];
@@ -87,7 +86,6 @@
         if (solution == nil)
             NSLog(@"Backtrack count %d", backTrackCount);
     }
-    NSLog(@"---------SudokuGenerator Generate solution end!");
     return solution;
 }
 

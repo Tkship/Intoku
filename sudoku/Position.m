@@ -55,7 +55,6 @@ static NSComparator comparator = ^NSComparisonResult(Position *pos1, Position *p
 }
 
 - (NSMutableArray*) shuffleSet: (NSMutableArray*) arr {
-    //NSLog(@"---------Position shuffleSet start!");
     //Shuffle by swapping random elements within the set
     NSUInteger i = arr.count;
     while (i > 1) {
