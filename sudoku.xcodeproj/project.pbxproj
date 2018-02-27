@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A81A3320203ED808004667FC /* DemoNewGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A81A331F203ED808004667FC /* DemoNewGameViewController.m */; };
 		A81BAD6920450C6B00456814 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A81BAD6820450C6B00456814 /* AVFoundation.framework */; };
-		A81BAD6D20450FA100456814 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A81BAD6C20450FA100456814 /* background.mp3 */; };
 		A81BAD6F204515F200456814 /* background_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A81BAD6E204515F100456814 /* background_music.mp3 */; };
 		A81BAD72204517B300456814 /* AudioPlayHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A81BAD71204517B300456814 /* AudioPlayHandler.m */; };
 		A85A01DA203D747E007B2EC1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A85A01D9203D747E007B2EC1 /* libz.tbd */; };
@@ -47,7 +46,6 @@
 		A81A3318203ED740004667FC /* DemoNewGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoNewGameViewController.h; sourceTree = "<group>"; };
 		A81A331F203ED808004667FC /* DemoNewGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoNewGameViewController.m; sourceTree = "<group>"; };
 		A81BAD6820450C6B00456814 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		A81BAD6C20450FA100456814 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
 		A81BAD6E204515F100456814 /* background_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background_music.mp3; sourceTree = "<group>"; };
 		A81BAD702045179D00456814 /* AudioPlayHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlayHandler.h; sourceTree = "<group>"; };
 		A81BAD71204517B300456814 /* AudioPlayHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlayHandler.m; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 		BB5C32E07DFC5FEC944F58CA = {
 			isa = PBXGroup;
 			children = (
-				A81BAD6C20450FA100456814 /* background.mp3 */,
 				A81BAD6E204515F100456814 /* background_music.mp3 */,
 				B3ECE8501A8B3ECD00CC07CB /* Storyboard.storyboard */,
 				BB5C34E9461EC977272699E3 /* Products */,
@@ -296,7 +293,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB5C3DE2C6CD624A84B55820 /* Images.xcassets in Resources */,
-				A81BAD6D20450FA100456814 /* background.mp3 in Resources */,
 				A81BAD6F204515F200456814 /* background_music.mp3 in Resources */,
 				BB5C3359C711A84FEFD85B1F /* LaunchScreen.xib in Resources */,
 				A85A01F1203D78AB007B2EC1 /* CrystalExpress.plist in Resources */,

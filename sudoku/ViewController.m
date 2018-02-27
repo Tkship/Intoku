@@ -57,6 +57,7 @@ static int CHECK_STATUS_COMPLETE = 2;
 int checkTime = 3;
 int checkingStatus = 0;
 Boolean backFromNewPage = false;
+UITextField *postTextField;
 
 @interface ViewController () <CERewardedVideoADDelegate>
 {
@@ -267,7 +268,6 @@ Boolean backFromNewPage = false;
 
 - (void) createGridView {
     UIView* gridview = _gridview = [UIView new];
-    //gridview.layer.backgroundColor = [UIColor clearColor].CGColor;
     CGRect rect = self.view.frame;
     rect.size.width -= 27;
     rect.size.width = rect.size.height / 2 < rect.size.width ? rect.size.height / 2 : rect.size.width;
@@ -279,9 +279,6 @@ Boolean backFromNewPage = false;
 
     gridview.frame = rect;
     gridview.backgroundColor = [UIColor whiteColor];
-    
-    //gridview.layer.borderColor = [UIColor blackColor].CGColor;
-    //gridview.layer.borderWidth = 2;
     
     [self.view addSubview:gridview];
 
@@ -298,19 +295,6 @@ Boolean backFromNewPage = false;
     NSLog(@"%@", log);
     self.logTextView.text = [NSString stringWithFormat:@"%@  %@\n%@", [dateFtr stringFromDate:[NSDate date]], log, self.logTextView.text];
 }
-
-
-/*- (void) createToolbar {
-    UISegmentedControl * toolbar = _toolbar = [UISegmentedControl new];
-    
-    [toolbar insertSegmentWithTitle:@"Check" atIndex:0 animated:NO];
-    [toolbar insertSegmentWithTitle:@"Hint" atIndex:1 animated:NO];
-    [toolbar addTarget:self action:@selector(buttonTouch:) forControlEvents:UIControlEventValueChanged];
-    
-    toolbar.frame = CGRectMake(10, _gridview.frame.origin.y + _gridview.frame.size.height + 10, self.view.bounds.size.width - 20, 30);
-    [self.view addSubview:toolbar];
-
-}*/
 
 - (void) newPuzzle {
     [self newPuzzleWithSolution:nil];
@@ -408,9 +392,7 @@ Boolean backFromNewPage = false;
             label.frame = rect;
             
             //set up the colors for the grid item
-            //label.layer.borderColor = [UIColor colorWithRed:244/255 green:244/255 blue:244/255 alpha:1.0].CGColor;
             label.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
-            label.layer.borderWidth = 2;
             label.layer.borderWidth = 3;
 
             //add the grid item to the parent gridview
@@ -458,9 +440,31 @@ Boolean backFromNewPage = false;
     [label addTarget:self
               action:@selector(textFieldDidChange:)
     forControlEvents:UIControlEventEditingChanged];
-     
+    
+    [label addTarget:self action:@selector(handleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     return label;
+}
+
+- (void) textFieldDidBeginEditing:(UITextField*)textField {
+    NSLog(@"--------textFieldDidBeginEditing:%@",textField.text);
+    if(postTextField != NULL){
+        postTextField.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
+    }
+    postTextField = textField;
+    
+    //determine the width/height of the grid items
+    CGRect rect = _gridview.frame;
+    CGFloat sizeOfSquares = (rect.size.width - 2) / 9;
+    //draw 4 views to represent grid lines
+    [self drawGridLines: rect sizeOfSquares:(int) sizeOfSquares];
+    textField.layer.borderColor = [UIColor colorWithRed:0.97 green:0.58 blue:0.54 alpha:1.0].CGColor;
+    textField.layer.borderWidth = 3;
+    UIView* gridview = _gridview;
+    //add the grid item to the parent gridvie
+    [gridview addSubview:textField];
+
+    NSLog(@"--------textFieldDidBeginEditing:%i",textField.tag);
 }
 
 - (void) drawGridLines: (CGRect) rect sizeOfSquares: (int) sizeOfSquares {
