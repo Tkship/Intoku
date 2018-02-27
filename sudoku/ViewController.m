@@ -203,23 +203,7 @@ Boolean backFromNewPage = false;
                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [alertView.layer addAnimation:popAnimation forKey:nil];
 }
-/*
--(void)animeClose:(id)sender
-{
-    CAKeyframeAnimation *hideAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    hideAnimation.duration = 0.4;
-    hideAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
-                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0f, 1.0f, 1.0f)],
-                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.00f, 0.00f, 0.00f)]];
-    hideAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f];
-    hideAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    hideAnimation.delegate = self;
-    [alertView.layer addAnimation:hideAnimation forKey:nil];
-    [self closePopWindow];
-}
-*/
+
 - (void)closePopWindow
 {
     _clickButton.userInteractionEnabled = YES;
