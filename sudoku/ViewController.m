@@ -209,23 +209,7 @@ Boolean backFromNewPage = false;
                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [alertView.layer addAnimation:popAnimation forKey:nil];
 }
-/*
--(void)animeClose:(id)sender
-{
-    CAKeyframeAnimation *hideAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    hideAnimation.duration = 0.4;
-    hideAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
-                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0f, 1.0f, 1.0f)],
-                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.00f, 0.00f, 0.00f)]];
-    hideAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f];
-    hideAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    hideAnimation.delegate = self;
-    [alertView.layer addAnimation:hideAnimation forKey:nil];
-    [self closePopWindow];
-}
-*/
+
 - (void)closePopWindow
 {
     _clickButton.userInteractionEnabled = YES;
@@ -237,7 +221,7 @@ Boolean backFromNewPage = false;
 - (IBAction)confirmCheck:(id)sender
 {
     if(checkTime == SHOW_SPLASH_ADS){
-        [self splashADDidRequest];
+        [self rewardedVideoADDidRequest];
         checkTime = TOTAL_CHECK_TIMES+1;
         checkingStatus = CHECK_STATUS_SHOW_SPLASH_ADS;
     } else {
@@ -268,8 +252,12 @@ Boolean backFromNewPage = false;
 }
 
 - (IBAction)showAnswerAction:(id)sender {
-    [self rewardedVideoADDidRequest];
-    [alertBackGround removeFromSuperview];
+    //[self rewardedVideoADDidRequest];
+    for (UIView* view in _gridview.subviews)
+        [view removeFromSuperview];
+    [self layoutGrid:self.puzzle.solution];
+    [self countdwonStart];
+    //[alertBackGround removeFromSuperview];
 }
 
 
@@ -608,7 +596,7 @@ Boolean backFromNewPage = false;
 {
     progress = [[UILabel alloc] initWithFrame:CGRectMake(80, 15, 100, 50)];
     progress.textColor = [UIColor redColor];
-    [progress setText:@"Time : 0:01"];
+    //[progress setText:@"Time : 0:01"];
     progress.backgroundColor = [UIColor clearColor];
     [self.view addSubview:progress];
     currMinute = 0;
@@ -630,7 +618,8 @@ Boolean backFromNewPage = false;
             currSeconds-=1;
         }
         if(currMinute>-1)
-            [progress setText:[NSString stringWithFormat:@"%@%d%@%02d",@"Time : ",currMinute,@":",currSeconds]];
+            //[progress setText:[NSString stringWithFormat:@"%@%d%@%02d",@"Time : ",currMinute,@":",currSeconds]];
+            NSLog(@"%@%d%@%02d",@"Time : ",currMinute,@":",currSeconds);
     }
     else
     {
@@ -720,12 +709,18 @@ Boolean backFromNewPage = false;
 
 - (void) rewardedVideoADWillDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
 {
+    /*
     for (UIView* view in _gridview.subviews)
         [view removeFromSuperview];
+     */
     
     [AudioPlayHandler resumeBackgroundMusic];
+    
+    /*
     [self layoutGrid:self.puzzle.solution];
     [self countdwonStart];
+    */
+    
     [self appendLog:@"rewardedVideoADWillDismiss"];
 }
 
