@@ -540,8 +540,6 @@ Boolean backFromNewPage = false;
     
     [AudioPlayHandler resumeBackgroundMusic];
     [self layoutGrid:self.puzzle.solution];
-    backFromNewPage = true;
-    [self performSegueWithIdentifier:@"goToNewPage" sender:self];
     // [self countdwonStart];
     [self appendLog:@"rewardedVideoADWillDismiss"];
 }
