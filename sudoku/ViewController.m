@@ -36,6 +36,7 @@
 #import "SudokuGenerator.h"
 #import "CERewardedVideoAD.h"
 #import "CESplash2AD.h"
+#import "AppDelegate.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -125,7 +126,7 @@ Boolean backFromNewPage = false;
 }
 
 - (IBAction)clickResultAction:(id)sender {
-    [self setAlertWindow];
+   [self setAlertWindow];
     [self validateGrid];
     if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
         [self splashADDidRequest];
@@ -346,7 +347,7 @@ Boolean backFromNewPage = false;
             //set up the colors for the grid item
             //label.layer.borderColor = [UIColor colorWithRed:244/255 green:244/255 blue:244/255 alpha:1.0].CGColor;
             label.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
-            label.layer.borderWidth = 2;
+            label.layer.borderWidth = 3;
 
             //add the grid item to the parent gridview
             [gridview addSubview:label];
