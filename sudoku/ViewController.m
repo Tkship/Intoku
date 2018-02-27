@@ -362,14 +362,6 @@ Boolean backFromNewPage = false;
     }
     
     [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
-    /*
-    if(checkTime == SHOW_SPLASH_ADS){
-        checkTime = TOTAL_CHECK_TIMES;
-        checkingStatus = CHECK_STATUS_SHOW_SPLASH_ADS;
-    } else {
-        checkingStatus = CHECK_STATUS_NORMAL;
-    }
-   */
 }
 
 - (void) layoutGrid: (Solution*) solutionToShow {
@@ -573,7 +565,6 @@ Boolean backFromNewPage = false;
 - (void) rewardedVideoADDidDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
 {
     backFromNewPage = true;
-    [self performSegueWithIdentifier:@"goToNewPage" sender:self];
 }
 
 /*!
