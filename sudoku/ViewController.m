@@ -74,6 +74,8 @@ Boolean backFromNewPage = false;
     int currMinute;
     int currSeconds;
     
+    UIImageView *alertBackGround;
+    UIImage *backGroundPic;
     UIView *alertView;
     UILabel *textLabel;
     UILabel *remainCheck;
@@ -126,13 +128,19 @@ Boolean backFromNewPage = false;
 
 - (IBAction)clickResultAction:(id)sender {
     [self setAlertWindow];
-    [self validateGrid];
+    //[self validateGrid];
     if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
         [self splashADDidRequest];
     }
 }
 
 - (void) setAlertWindow{
+    alertBackGround = [[UIImageView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    backGroundPic = [UIImage imageNamed:@"alert_bg"];
+    alertBackGround.image = backGroundPic;
+    
+    
+    
     alertView = [[UIView alloc]initWithFrame:CGRectMake(48, 123, 295, 372)];
     [alertView setBackgroundColor:[UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1]];
     alertView.layer.cornerRadius = 24;
@@ -154,22 +162,25 @@ Boolean backFromNewPage = false;
     remainCheck.textAlignment = NSTextAlignmentCenter;
     remainCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 100);
     
+    askCheck = [UIButton buttonWithType:UIButtonTypeSystem];
     askCheck = [[UIButton alloc]initWithFrame:CGRectMake(95.5, 311, 184, 54)];
     askCheck.layer.masksToBounds = TRUE;
     askCheck.layer.cornerRadius = 12;
     [askCheck setBackgroundColor: [UIColor whiteColor]];
     [askCheck setTitleColor: [UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1] forState:UIControlStateNormal];
     askCheck.titleLabel.font = [UIFont systemFontOfSize: 24];
-    if(checkTime > 1)
+    if(checkTime >= 1 )
     {
         [askCheck setTitle: @"HINT" forState:UIControlStateNormal];
     }
-    else if (checkTime == 1)
+    else if (checkTime == 0)
     {
         [askCheck setTitle: @"Watch ADs" forState:UIControlStateNormal];
+        [alertBackGround removeFromSuperview];
         //[self splashADDidRequest];
     }
     askCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 264);
+    [askCheck addTarget:self action:@selector(confirmCheck:) forControlEvents:UIControlEventTouchUpInside];
     
     closeWindow = [[UIButton alloc]initWithFrame:CGRectMake(95.5, 384, 184, 54)];
     closeWindow.layer.masksToBounds = TRUE;
@@ -179,17 +190,33 @@ Boolean backFromNewPage = false;
     closeWindow.titleLabel.font = [UIFont systemFontOfSize: 24];
     [closeWindow setTitle:@"Close" forState:UIControlStateNormal];
     closeWindow.layer.position = CGPointMake(alertView.frame.size.width/2, 324);
+    [closeWindow addTarget:self action:@selector(closeAlert:) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    //[alertBackGround addSubview:alertView];
     [alertView addSubview:textLabel];
     [alertView addSubview:remainCheck];
     [alertView addSubview:askCheck];
     [alertView addSubview:closeWindow];
+    [self.view addSubview:alertBackGround];
     [self.view addSubview:alertView];
 }
 
+- (IBAction)confirmCheck:(id)sender
+{
+    [self validateGrid];
+    [alertView removeFromSuperview];
+    [alertBackGround removeFromSuperview];
+}
+
+-(IBAction)closeAlert:(id)sender
+{
+    [alertView removeFromSuperview];
+    [alertBackGround removeFromSuperview];
+}
+
 - (IBAction)showAnswerAction:(id)sender {
-      [self rewardedVideoADDidRequest];
+    [self rewardedVideoADDidRequest];
+    [alertBackGround removeFromSuperview];
 }
 
 
