@@ -10,17 +10,28 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "I2WAPI.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+@synthesize myAudioPlayer;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // init SDK
     [I2WAPI initWithVerboseLog:YES isTestMode:YES];
+    
+    //start a background sound
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"background" ofType: @"mp3"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:soundFilePath ];
+    myAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+    myAudioPlayer.numberOfLoops = -1; //infinite loop
+    [myAudioPlayer play];
+    
     return YES;
 }
 
