@@ -129,12 +129,7 @@ Boolean backFromNewPage = false;
 }
 
 - (IBAction)clickResultAction:(id)sender {
-    /*[self setAlertWindow];
-    //[self validateGrid];
-
-    /*if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
-        [self splashADDidRequest];
-    }*/
+    [self setAlertWindow];
 }
 
 - (void) setAlertWindow{
@@ -201,8 +196,36 @@ Boolean backFromNewPage = false;
     [alertView addSubview:closeWindow];
     [self.view addSubview:alertBackGround];
     [self.view addSubview:alertView];
+    
+    CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    popAnimation.duration = 0.9;
+    popAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01f, 0.01f, 1.0f)],
+                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
+                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.93f, 0.93f, 0.9f)],
+                            [NSValue valueWithCATransform3D:CATransform3DIdentity]];
+    popAnimation.keyTimes = @[@0.15f, @0.6f, @0.8f, @1.0f];
+    popAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [alertView.layer addAnimation:popAnimation forKey:nil];
 }
-
+/*
+-(void)animeClose:(id)sender
+{
+    CAKeyframeAnimation *hideAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    hideAnimation.duration = 0.4;
+    hideAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
+                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0f, 1.0f, 1.0f)],
+                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.00f, 0.00f, 0.00f)]];
+    hideAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f];
+    hideAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    hideAnimation.delegate = self;
+    [alertView.layer addAnimation:hideAnimation forKey:nil];
+    [self closePopWindow];
+}
+*/
 - (void)closePopWindow
 {
     _clickButton.userInteractionEnabled = YES;
@@ -225,6 +248,21 @@ Boolean backFromNewPage = false;
 }
 
 -(IBAction)closeAlert:(id)sender
+{
+    CAKeyframeAnimation *hideAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    hideAnimation.duration = 0.3;
+    hideAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
+                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0f, 1.0f, 1.0f)],
+                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.00f, 0.00f, 0.00f)]];
+    hideAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f];
+    hideAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    hideAnimation.delegate = self;
+    [alertView.layer addAnimation:hideAnimation forKey:nil];
+}
+
+-(void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     [self closePopWindow];
 }
