@@ -133,6 +133,9 @@ Boolean backFromNewPage = false;
 }
 
 - (void) setAlertWindow{
+    
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+
     alertBackGround = [[UIImageView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     backGroundPic = [UIImage imageNamed:@"alert_bg"];
     alertBackGround.image = backGroundPic;
@@ -212,6 +215,7 @@ Boolean backFromNewPage = false;
 
 - (void)closePopWindow
 {
+    [[[UIApplication sharedApplication] keyWindow] endEditing:NO];
     _clickButton.userInteractionEnabled = YES;
     _solveButton.userInteractionEnabled = YES;
     [alertView removeFromSuperview];
@@ -362,14 +366,6 @@ Boolean backFromNewPage = false;
     }
     
     [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
-    /*
-    if(checkTime == SHOW_SPLASH_ADS){
-        checkTime = TOTAL_CHECK_TIMES;
-        checkingStatus = CHECK_STATUS_SHOW_SPLASH_ADS;
-    } else {
-        checkingStatus = CHECK_STATUS_NORMAL;
-    }
-   */
 }
 
 - (void) layoutGrid: (Solution*) solutionToShow {
@@ -573,11 +569,6 @@ Boolean backFromNewPage = false;
 - (void) rewardedVideoADDidDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
 {
     backFromNewPage = true;
-<<<<<<< HEAD
-    [self performSegueWithIdentifier:@"goToNewPage" sender:self];
-    //[self performSegueWithIdentifier:@"goToNewPage" sender:self];
-=======
->>>>>>> 63e52cced73c5a0a4f6a50efef9f802d67afa488
 }
 
 /*!
