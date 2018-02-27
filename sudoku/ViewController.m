@@ -36,6 +36,7 @@
 #import "SudokuGenerator.h"
 #import "CERewardedVideoAD.h"
 #import "CESplash2AD.h"
+#import "AppDelegate.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -129,9 +130,10 @@ Boolean backFromNewPage = false;
 - (IBAction)clickResultAction:(id)sender {
     [self setAlertWindow];
     //[self validateGrid];
-    if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
+
+    /*if(checkingStatus == CHECK_STATUS_SHOW_SPLASH_ADS) {
         [self splashADDidRequest];
-    }
+    }*/
 }
 
 - (void) setAlertWindow{
@@ -139,7 +141,8 @@ Boolean backFromNewPage = false;
     backGroundPic = [UIImage imageNamed:@"alert_bg"];
     alertBackGround.image = backGroundPic;
     
-    
+    _clickButton.userInteractionEnabled = NO;
+    _solveButton.userInteractionEnabled = NO;
     
     alertView = [[UIView alloc]initWithFrame:CGRectMake(48, 123, 295, 372)];
     [alertView setBackgroundColor:[UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1]];
@@ -176,8 +179,6 @@ Boolean backFromNewPage = false;
     else if (checkTime == 0)
     {
         [askCheck setTitle: @"Watch ADs" forState:UIControlStateNormal];
-        [alertBackGround removeFromSuperview];
-        //[self splashADDidRequest];
     }
     askCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 264);
     [askCheck addTarget:self action:@selector(confirmCheck:) forControlEvents:UIControlEventTouchUpInside];
@@ -201,17 +202,30 @@ Boolean backFromNewPage = false;
     [self.view addSubview:alertView];
 }
 
-- (IBAction)confirmCheck:(id)sender
+- (void)closePopWindow
 {
-    [self validateGrid];
+    _clickButton.userInteractionEnabled = YES;
+    _solveButton.userInteractionEnabled = YES;
     [alertView removeFromSuperview];
     [alertBackGround removeFromSuperview];
 }
 
+- (IBAction)confirmCheck:(id)sender
+{
+    if(checkTime == SHOW_SPLASH_ADS){
+        [self splashADDidRequest];
+        checkTime = TOTAL_CHECK_TIMES+1;
+        checkingStatus = CHECK_STATUS_SHOW_SPLASH_ADS;
+    } else {
+        checkingStatus = CHECK_STATUS_NORMAL;
+    }
+    [self validateGrid];
+    [self closePopWindow];
+}
+
 -(IBAction)closeAlert:(id)sender
 {
-    [alertView removeFromSuperview];
-    [alertBackGround removeFromSuperview];
+    [self closePopWindow];
 }
 
 - (IBAction)showAnswerAction:(id)sender {
@@ -321,14 +335,14 @@ Boolean backFromNewPage = false;
     }
     
     [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
-
+    /*
     if(checkTime == SHOW_SPLASH_ADS){
         checkTime = TOTAL_CHECK_TIMES;
         checkingStatus = CHECK_STATUS_SHOW_SPLASH_ADS;
     } else {
         checkingStatus = CHECK_STATUS_NORMAL;
     }
-    
+   */
 }
 
 - (void) layoutGrid: (Solution*) solutionToShow {
@@ -374,6 +388,7 @@ Boolean backFromNewPage = false;
             //label.layer.borderColor = [UIColor colorWithRed:244/255 green:244/255 blue:244/255 alpha:1.0].CGColor;
             label.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
             label.layer.borderWidth = 2;
+            label.layer.borderWidth = 3;
 
             //add the grid item to the parent gridview
             [gridview addSubview:label];
@@ -733,13 +748,13 @@ Boolean backFromNewPage = false;
 
 - (void) splash2ADWillDismiss:(nonnull CESplash2AD *)splash2AD
 {
-
     [self appendLog:@"splash2ADWillDismiss"];
 }
 
 - (void) splash2ADDidDismiss:(nonnull CESplash2AD *)splash2AD
 {
     [self appendLog:@"splash2ADDidDismiss"];
+    //checkTime = TOTAL_CHECK_TIMES;
 }
 
 
