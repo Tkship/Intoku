@@ -291,6 +291,8 @@ UITextField *postTextField;
 }
 
 - (IBAction)showAnswerAction:(id)sender {
+    _clickButton.userInteractionEnabled = NO;
+    _solveButton.userInteractionEnabled = NO;
     //[self rewardedVideoADDidRequest];
     for (UIView* view in _gridview.subviews)
         [view removeFromSuperview];
@@ -332,10 +334,12 @@ UITextField *postTextField;
 
 - (void) newPuzzle {
     [self newPuzzleWithSolution:nil];
+    _clickButton.userInteractionEnabled = YES;
+    _solveButton.userInteractionEnabled = YES;
 }
 
 - (void) newPuzzleWithSolution: (Solution *) solution {
-    checkTime = TOTAL_CHECK_TIMES;
+    [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
     Puzzle* puzzle = nil;
 
     if (solution == nil)
@@ -404,6 +408,7 @@ UITextField *postTextField;
     {
         [self newPuzzle];
         [self closeAlert:self];
+        checkTime = TOTAL_CHECK_TIMES;
         [self performSegueWithIdentifier:@"goToNewPage" sender:self];
     }
 }
@@ -588,6 +593,7 @@ UITextField *postTextField;
     {
         backFromNewPage = true;
         [timer invalidate];
+        checkTime = TOTAL_CHECK_TIMES;
         [self performSegueWithIdentifier:@"goToNewPage" sender:self];
     }
 }
