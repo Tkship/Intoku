@@ -135,6 +135,9 @@ UITextField *postTextField;
 
 - (void) setAlertWindow{
     
+    UIImage *watchAD = [UIImage imageNamed:@"watchad"];
+    UIImage *pressWatch = [UIImage imageNamed:@"press_watchad"];
+    
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 
     alertBackGround = [[UIImageView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -169,19 +172,26 @@ UITextField *postTextField;
     askCheck = [[UIButton alloc]initWithFrame:CGRectMake(95.5, 311, 184, 54)];
     askCheck.layer.masksToBounds = TRUE;
     askCheck.layer.cornerRadius = 12;
-    askCheck.layer.shadowOpacity = 0.5;
-    askCheck.layer.shadowColor = [UIColor blackColor].CGColor;
-    askCheck.layer.shadowOffset = CGSizeMake(0.0, 2.0);
-    [askCheck setBackgroundColor: [UIColor whiteColor]];
+    if( checkTime > 0 )
+    {
+        askCheck.layer.shadowOpacity = 0.5;
+        askCheck.layer.shadowColor = [UIColor blackColor].CGColor;
+        askCheck.layer.shadowOffset = CGSizeMake(0.0, 2.0);
+        [askCheck setBackgroundColor: [UIColor whiteColor]];
+    }
     
     
     [askCheck setTitleColor: [UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1] forState:UIControlStateNormal];
     [askCheck setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     askCheck.titleLabel.font = [UIFont boldSystemFontOfSize: 24];
-    if(checkTime >= 1 )
+    if(checkTime > 0 )
         [askCheck setTitle: @"Hint" forState:UIControlStateNormal];
     else if (checkTime == 0)
-        [askCheck setTitle: @"Watch ADs" forState:UIControlStateNormal];
+    {
+        [askCheck setImage:watchAD forState:UIControlStateNormal];
+        [askCheck setImage:pressWatch forState:UIControlStateHighlighted];
+    }
+    
 
     askCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 264);
     [askCheck addTarget:self action:@selector(pressCheck:) forControlEvents:UIControlEventTouchDown];
