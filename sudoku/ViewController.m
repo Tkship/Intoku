@@ -56,8 +56,9 @@ static int CHECK_STATUS_SHOW_SPLASH_ADS = 1;
 static int CHECK_STATUS_COMPLETE = 2;
 int checkTime = 3;
 int checkingStatus = 0;
+CGFloat GUIDELINE_SCREEN_WIDTH = 375;
 Boolean backFromNewPage = false;
-UITextField *postTextField;
+UITextField *pastTextField;
 
 @interface ViewController () <CERewardedVideoADDelegate>
 {
@@ -309,9 +310,11 @@ UITextField *postTextField;
     rect.size.width = rect.size.height / 2 < rect.size.width ? rect.size.height / 2 : rect.size.width;
     rect.size.width -= (int) rect.size.width % 9;
     rect.size.width += 2;
+
     rect.size.height = rect.size.width;
-    rect.origin.x += (self.view.frame.size.width - rect.size.width) / 2;
-    rect.origin.y += 100;
+    rect.origin.x += (self.view.frame.size.width - rect.size.width) / 2 ;
+    rect.origin.y += 100 * (self.view.frame.size.width / GUIDELINE_SCREEN_WIDTH);
+
 
     gridview.frame = rect;
     gridview.backgroundColor = [UIColor whiteColor];
@@ -379,12 +382,6 @@ UITextField *postTextField;
                               [_puzzle.solution positionAtIndex:tag].value.integerValue ?
                 [UIColor blackColor] :
                 [UIColor colorWithRed:0.97 green:0.58 blue:0.54 alpha:1.0];
-            /*
-            if(!([_puzzle.grid positionAtIndex:tag].value.integerValue == [_puzzle.solution positionAtIndex:tag].value.integerValue) ||
-               ([_puzzle.grid positionAtIndex:tag].value.integerValue == 0)) {
-                   isComplete = false;
-               }
-            */
             
             textField.textColor = color;
         }
@@ -506,27 +503,37 @@ UITextField *postTextField;
 }
 
 - (void) textFieldDidBeginEditing:(UITextField*)textField {
-    NSLog(@"--------textFieldDidBeginEditing:%@",textField.text);
-    if(postTextField != NULL){
-        postTextField.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
-    }
-    postTextField = textField;
+    // Set the color of past TextField user tapped last time to BLOCK.
+    [self setTextFieldBalck:textField];
+    
+    //re-draw 4 views to represent grid lines
     CGFloat sizeOfSquares = (_gridview.frame.size.width - 2) / 9;
-    //draw 4 views to represent grid lines
     [self drawGridLines: _gridview.frame sizeOfSquares:(int) sizeOfSquares];
+    
+    // Change the color of TextField to ORANGE
+    [self setSelectedTextFieldColor:textField];
+}
+
+- (void) setTextFieldBalck:(UITextField*)textField {
+    if(pastTextField != NULL){
+        pastTextField.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
+    }
+    pastTextField = textField;
+}
+
+- (void) setSelectedTextFieldColor:(UITextField*)textField {
     textField.layer.borderColor = [UIColor colorWithRed:0.97 green:0.58 blue:0.54 alpha:1.0].CGColor;
     textField.layer.borderWidth = 3;
-    UIView* gridview = _gridview;
+    
     //add the grid item to the parent gridvie
-    [gridview addSubview:textField];
-
-    NSLog(@"--------textFieldDidBeginEditing:%i",textField.tag);
+    [_gridview addSubview:textField];
 }
 
 - (void) drawGridLines: (CGRect) rect sizeOfSquares: (int) sizeOfSquares {
     UIView* line = [UILabel new];
     
     rect = CGRectMake(0, sizeOfSquares * 3, sizeOfSquares * 9 + 2, 2);
+
     line.frame = rect;
     line.layer.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0].CGColor;
     
@@ -536,7 +543,6 @@ UITextField *postTextField;
     rect = CGRectMake(0, sizeOfSquares * 6, sizeOfSquares * 9 + 2, 2);
     line.frame = rect;
     line.layer.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0].CGColor;;
-    
     [_gridview addSubview:line];
     
     line = [UILabel new];
