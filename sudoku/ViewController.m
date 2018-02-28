@@ -506,12 +506,9 @@ UITextField *postTextField;
         postTextField.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
     }
     postTextField = textField;
-    
-    //determine the width/height of the grid items
-    CGRect rect = _gridview.frame;
-    CGFloat sizeOfSquares = (rect.size.width - 2) / 9;
+    CGFloat sizeOfSquares = (_gridview.frame.size.width - 2) / 9;
     //draw 4 views to represent grid lines
-    [self drawGridLines: rect sizeOfSquares:(int) sizeOfSquares];
+    [self drawGridLines: _gridview.frame sizeOfSquares:(int) sizeOfSquares];
     textField.layer.borderColor = [UIColor colorWithRed:0.97 green:0.58 blue:0.54 alpha:1.0].CGColor;
     textField.layer.borderWidth = 3;
     UIView* gridview = _gridview;
