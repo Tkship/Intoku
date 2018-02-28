@@ -155,42 +155,51 @@ UITextField *postTextField;
     textLabel.textColor = [UIColor whiteColor];
     textLabel.font = [UIFont boldSystemFontOfSize:40];
     textLabel.textAlignment = NSTextAlignmentCenter;
-    textLabel.layer.position = CGPointMake(alertView.frame.size.width/2, 65);
+    textLabel.layer.position = CGPointMake(alertView.frame.size.width/2, 95);
     
     remainCheck = [[UILabel alloc]initWithFrame:CGRectMake(121, 255, 133, 25)];
     remainCheck.layer.masksToBounds = TRUE;
     remainCheck.text = [NSString stringWithFormat:@"Hints left:%d",checkTime];
     remainCheck.textColor = [UIColor whiteColor];
-    remainCheck.font = [UIFont boldSystemFontOfSize:22];
+    remainCheck.font = [UIFont systemFontOfSize:20];
     remainCheck.textAlignment = NSTextAlignmentCenter;
-    remainCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 100);
+    remainCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 135);
     
     askCheck = [UIButton buttonWithType:UIButtonTypeSystem];
     askCheck = [[UIButton alloc]initWithFrame:CGRectMake(95.5, 311, 184, 54)];
     askCheck.layer.masksToBounds = TRUE;
     askCheck.layer.cornerRadius = 12;
+    askCheck.layer.shadowOpacity = 0.5;
+    askCheck.layer.shadowColor = [UIColor blackColor].CGColor;
+    askCheck.layer.shadowOffset = CGSizeMake(0.0, 2.0);
     [askCheck setBackgroundColor: [UIColor whiteColor]];
+    
+    
     [askCheck setTitleColor: [UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1] forState:UIControlStateNormal];
-    askCheck.titleLabel.font = [UIFont systemFontOfSize: 24];
+    [askCheck setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    askCheck.titleLabel.font = [UIFont boldSystemFontOfSize: 24];
     if(checkTime >= 1 )
-    {
-        [askCheck setTitle: @"HINT" forState:UIControlStateNormal];
-    }
+        [askCheck setTitle: @"Hint" forState:UIControlStateNormal];
     else if (checkTime == 0)
-    {
         [askCheck setTitle: @"Watch ADs" forState:UIControlStateNormal];
-    }
+
     askCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 264);
+    [askCheck addTarget:self action:@selector(pressCheck:) forControlEvents:UIControlEventTouchDown];
     [askCheck addTarget:self action:@selector(confirmCheck:) forControlEvents:UIControlEventTouchUpInside];
     
     closeWindow = [[UIButton alloc]initWithFrame:CGRectMake(95.5, 384, 184, 54)];
     closeWindow.layer.masksToBounds = TRUE;
     closeWindow.layer.cornerRadius = 12;
-    [closeWindow setBackgroundColor: [UIColor whiteColor]];
-    [closeWindow setTitleColor: [UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1] forState:UIControlStateNormal];
-    closeWindow.titleLabel.font = [UIFont systemFontOfSize: 24];
+    [closeWindow.layer setBorderColor: [UIColor whiteColor].CGColor];
+    [closeWindow.layer setBorderWidth:2.0];
+    [closeWindow setBackgroundColor: [UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1]];
+    [closeWindow setTitleColor: [UIColor whiteColor] forState:UIControlStateNormal];
+    [closeWindow setTitleColor:[UIColor colorWithRed:0.98 green:0.58 blue:0.45 alpha:1] forState:UIControlStateHighlighted];
+
+    closeWindow.titleLabel.font = [UIFont boldSystemFontOfSize: 24];
     [closeWindow setTitle:@"Close" forState:UIControlStateNormal];
     closeWindow.layer.position = CGPointMake(alertView.frame.size.width/2, 324);
+    [closeWindow addTarget:self action:@selector(pressClose:) forControlEvents:UIControlEventTouchDown];
     [closeWindow addTarget:self action:@selector(closeAlert:) forControlEvents:UIControlEventTouchUpInside];
     
     //[alertBackGround addSubview:alertView];
@@ -221,6 +230,22 @@ UITextField *postTextField;
     _solveButton.userInteractionEnabled = YES;
     [alertView removeFromSuperview];
     [alertBackGround removeFromSuperview];
+}
+
+- (void)pressCheck:(UIButton *)sender
+{
+    sender.backgroundColor = [UIColor colorWithRed:1.0 green:0.70 blue:0.60 alpha:1];
+    sender.layer.shadowOpacity = 0.4;
+    sender.layer.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5].CGColor;
+    sender.layer.shadowOffset = CGSizeMake( 0, 0);
+}
+
+- (void)pressClose:(UIButton *)sender
+{
+    sender.backgroundColor = [UIColor whiteColor];
+    sender.layer.shadowOpacity = 0.4;
+    sender.layer.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5].CGColor;
+    sender.layer.shadowOffset = CGSizeMake( 0, 0);
 }
 
 - (IBAction)confirmCheck:(id)sender
