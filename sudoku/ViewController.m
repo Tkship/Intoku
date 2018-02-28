@@ -96,7 +96,6 @@ UITextField *postTextField;
     SudokuGenerator * _generator;
 }
 
-
 /* The view controller loads all initial UI here */
 
 - (void)viewDidLoad {
@@ -130,6 +129,7 @@ UITextField *postTextField;
 }
 
 - (IBAction)clickResultAction:(id)sender {
+    [self checkComplete];
     [self setAlertWindow];
 }
 
@@ -192,7 +192,6 @@ UITextField *postTextField;
         [askCheck setImage:pressWatch forState:UIControlStateHighlighted];
     }
     
-
     askCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 264);
     [askCheck addTarget:self action:@selector(pressCheck:) forControlEvents:UIControlEventTouchDown];
     [askCheck addTarget:self action:@selector(confirmCheck:) forControlEvents:UIControlEventTouchUpInside];
@@ -336,6 +335,7 @@ UITextField *postTextField;
 }
 
 - (void) newPuzzleWithSolution: (Solution *) solution {
+    checkTime = TOTAL_CHECK_TIMES;
     Puzzle* puzzle = nil;
 
     if (solution == nil)
@@ -365,9 +365,8 @@ UITextField *postTextField;
 
 
 - (void) validateGrid {
-    checkTime --;
-    Boolean isComplete = true;
     
+    checkTime --;
     for (UIView* view in _gridview.subviews) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField * textField = (UITextField *) view;
@@ -376,15 +375,37 @@ UITextField *postTextField;
                               [_puzzle.solution positionAtIndex:tag].value.integerValue ?
                 [UIColor blackColor] :
                 [UIColor colorWithRed:0.97 green:0.58 blue:0.54 alpha:1.0];
+            /*
             if(!([_puzzle.grid positionAtIndex:tag].value.integerValue == [_puzzle.solution positionAtIndex:tag].value.integerValue) ||
                ([_puzzle.grid positionAtIndex:tag].value.integerValue == 0)) {
                    isComplete = false;
                }
+            */
+            
             textField.textColor = color;
         }
     }
     
     [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
+}
+
+-(void) checkComplete
+{
+    Boolean isComplete = TRUE;
+    for (UIView* view in _gridview.subviews) {
+            int tag = (int) view.tag;
+            if(!([_puzzle.grid positionAtIndex:tag].value.integerValue == [_puzzle.solution positionAtIndex:tag].value.integerValue) ||
+               ([_puzzle.grid positionAtIndex:tag].value.integerValue == 0)) {
+                            isComplete = FALSE;
+                            break;
+            }
+        }
+    if(isComplete)
+    {
+        [self newPuzzle];
+        [self closeAlert:self];
+        [self performSegueWithIdentifier:@"goToNewPage" sender:self];
+    }
 }
 
 - (void) layoutGrid: (Solution*) solutionToShow {
