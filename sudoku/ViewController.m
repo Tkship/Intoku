@@ -716,6 +716,7 @@ UITextField *pastTextField;
     if(backFromNewPage) {
         backFromNewPage = !backFromNewPage;
         [self newPuzzle];
+        self.checkTimeView.text = [NSString stringWithFormat:@"%d",checkTime];
     }
 }
 
