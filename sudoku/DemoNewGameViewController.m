@@ -20,6 +20,7 @@
 
 @implementation DemoNewGameViewController
 
+
 -(void) viewDidLoad {
     [super viewDidLoad];
     self.NewGamebtn.layer.cornerRadius = 12;
@@ -38,22 +39,34 @@
  * @brief send splash viedo request to load ads, and it will display ads while loading successfully.
  *
  */
--(void) splashADDidRequest
-{
+-(void) splashADDidRequest {
     ceSplash2AD = [[CESplash2AD alloc] initWithPlacement:@"END_INTERSTITUAL"];
     ceSplash2AD.delegate = self;
     [ceSplash2AD loadAd];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+
+
 #pragma mark - CESplash2ADDelegate
-- (void)splash2ADDidLoaded:(CESplash2AD*)splash2AD
-{
+- (void)splash2ADDidLoaded:(CESplash2AD*)splash2AD {
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     while (topController.presentedViewController) {
         topController = topController.presentedViewController;
     }
-    
+
     [ceSplash2AD showFromViewController:topController animated:YES];
+}
+
+- (void) splash2ADDidFail:(nonnull CESplash2AD *)splash2AD withError:(nullable NSError *)error {
+    [self appendLog:@"splash2ADDidFail error"];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) splash2ADDidVideoStart:(nonnull CESplash2AD *)splash2AD

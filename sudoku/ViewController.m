@@ -50,11 +50,11 @@
 #define ENABLE_ANIMATIONS
 
 static int SHOW_SPLASH_ADS = 0;
-static int TOTAL_CHECK_TIMES = 3;
+static int TOTAL_CHECK_TIMES = 0;
 static int CHECK_STATUS_NORMAL = 0;
 static int CHECK_STATUS_SHOW_SPLASH_ADS = 1;
 static int CHECK_STATUS_COMPLETE = 2;
-int checkTime = 3;
+int checkTime = 0;
 int checkingStatus = 0;
 CGFloat GUIDELINE_SCREEN_WIDTH = 375;
 Boolean backFromNewPage = false;
@@ -71,13 +71,7 @@ UITextField *pastTextField;
 }
 @end
 
-@interface ViewController()
-{
-    UILabel *progress;
-    NSTimer *timer;
-    int currMinute;
-    int currSeconds;
-    
+@interface ViewController() {
     UIImageView *alertBackGround;
     UIImage *backGroundPic;
     UIView *alertView;
@@ -106,9 +100,14 @@ UITextField *pastTextField;
     
     _difficulty = PuzzleDifficultyEasy;
     _generator = [[SudokuGenerator alloc] init];
+    
+    UIImage *pressClick=[UIImage imageNamed:@"icon_hint_hover"];
+    UIImage *pressSolve=[UIImage imageNamed:@"icon_solve_hover"];
+    
+    [_clickButton setImage:pressClick forState:UIControlStateHighlighted];
+    [_solveButton setImage:pressSolve forState:UIControlStateHighlighted];
 
     // Do any additional setup after loading the view, typically from a nib.
-    
     // grid view
     
 #ifdef SHOW_GRIDVIEW
@@ -118,10 +117,6 @@ UITextField *pastTextField;
 #ifdef SHOW_PUZZLE
     [self newPuzzle];
 #endif
-
-/*#ifdef SHOW_TOOLBAR
-    [self createToolbar];
-#endif*/
     
 #ifdef CHECK_TIME
     self.checkTimeView.text = [NSString stringWithFormat:@"%d",checkTime];
@@ -132,10 +127,10 @@ UITextField *pastTextField;
 - (IBAction)clickResultAction:(id)sender {
     [self checkComplete];
     [self setAlertWindow];
+    _gridview.userInteractionEnabled = NO;
 }
 
 - (void) setAlertWindow{
-    
     UIImage *watchAD = [UIImage imageNamed:@"watchad"];
     UIImage *pressWatch = [UIImage imageNamed:@"press_watchad"];
     
@@ -153,7 +148,8 @@ UITextField *pastTextField;
     alertView.layer.cornerRadius = 24;
     alertView.layer.position = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     
-    textLabel = [[UILabel alloc]initWithFrame:CGRectMake(84, 202, 208, 47)];
+    //textLabel = [[UILabel alloc]initWithFrame:CGRectMake(84, 202, 295, 47)];
+    textLabel = [[UILabel alloc]initWithFrame:CGRectMake(84, 229, 295, 47)];
     textLabel.layer.masksToBounds = TRUE;
     textLabel.text = [NSString stringWithFormat:@"Need help?"];
     textLabel.textColor = [UIColor whiteColor];
@@ -161,6 +157,7 @@ UITextField *pastTextField;
     textLabel.textAlignment = NSTextAlignmentCenter;
     textLabel.layer.position = CGPointMake(alertView.frame.size.width/2, 95);
     
+    /*
     remainCheck = [[UILabel alloc]initWithFrame:CGRectMake(121, 255, 133, 25)];
     remainCheck.layer.masksToBounds = TRUE;
     remainCheck.text = [NSString stringWithFormat:@"Hints left:%d",checkTime];
@@ -168,13 +165,13 @@ UITextField *pastTextField;
     remainCheck.font = [UIFont systemFontOfSize:20];
     remainCheck.textAlignment = NSTextAlignmentCenter;
     remainCheck.layer.position = CGPointMake(alertView.frame.size.width/2, 135);
+     */
     
     askCheck = [UIButton buttonWithType:UIButtonTypeSystem];
     askCheck = [[UIButton alloc]initWithFrame:CGRectMake(95.5, 311, 184, 54)];
     askCheck.layer.masksToBounds = TRUE;
     askCheck.layer.cornerRadius = 12;
-    if( checkTime > 0 )
-    {
+    if( checkTime > 0 ) {
         askCheck.layer.shadowOpacity = 0.5;
         askCheck.layer.shadowColor = [UIColor blackColor].CGColor;
         askCheck.layer.shadowOffset = CGSizeMake(0.0, 2.0);
@@ -187,8 +184,7 @@ UITextField *pastTextField;
     askCheck.titleLabel.font = [UIFont boldSystemFontOfSize: 24];
     if(checkTime > 0 )
         [askCheck setTitle: @"Hint" forState:UIControlStateNormal];
-    else if (checkTime == 0)
-    {
+    else if (checkTime == 0) {
         [askCheck setImage:watchAD forState:UIControlStateNormal];
         [askCheck setImage:pressWatch forState:UIControlStateHighlighted];
     }
@@ -212,9 +208,8 @@ UITextField *pastTextField;
     [closeWindow addTarget:self action:@selector(pressClose:) forControlEvents:UIControlEventTouchDown];
     [closeWindow addTarget:self action:@selector(closeAlert:) forControlEvents:UIControlEventTouchUpInside];
     
-    //[alertBackGround addSubview:alertView];
     [alertView addSubview:textLabel];
-    [alertView addSubview:remainCheck];
+    //[alertView addSubview:remainCheck];
     [alertView addSubview:askCheck];
     [alertView addSubview:closeWindow];
     [self.view addSubview:alertBackGround];
@@ -233,33 +228,30 @@ UITextField *pastTextField;
     [alertView.layer addAnimation:popAnimation forKey:nil];
 }
 
-- (void)closePopWindow
-{
+- (void)closePopWindow {
     [[[UIApplication sharedApplication] keyWindow] endEditing:NO];
     _clickButton.userInteractionEnabled = YES;
     _solveButton.userInteractionEnabled = YES;
+    _gridview.userInteractionEnabled = YES;
     [alertView removeFromSuperview];
     [alertBackGround removeFromSuperview];
 }
 
-- (void)pressCheck:(UIButton *)sender
-{
+- (void)pressCheck:(UIButton *)sender {
     sender.backgroundColor = [UIColor colorWithRed:1.0 green:0.70 blue:0.60 alpha:1];
     sender.layer.shadowOpacity = 0.4;
     sender.layer.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5].CGColor;
     sender.layer.shadowOffset = CGSizeMake( 0, 0);
 }
 
-- (void)pressClose:(UIButton *)sender
-{
+- (void)pressClose:(UIButton *)sender {
     sender.backgroundColor = [UIColor whiteColor];
     sender.layer.shadowOpacity = 0.4;
     sender.layer.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5].CGColor;
     sender.layer.shadowOffset = CGSizeMake( 0, 0);
 }
 
-- (IBAction)confirmCheck:(id)sender
-{
+- (IBAction)confirmCheck:(id)sender {
     if(checkTime == SHOW_SPLASH_ADS){
         [self rewardedVideoADDidRequest];
         checkTime = TOTAL_CHECK_TIMES+1;
@@ -271,35 +263,24 @@ UITextField *pastTextField;
     [self closePopWindow];
 }
 
--(IBAction)closeAlert:(id)sender
-{
-    CAKeyframeAnimation *hideAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    hideAnimation.duration = 0.3;
-    hideAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
-                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0f, 1.0f, 1.0f)],
-                             [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.00f, 0.00f, 0.00f)]];
-    hideAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f];
-    hideAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    hideAnimation.delegate = self;
-    [alertView.layer addAnimation:hideAnimation forKey:nil];
+-(IBAction)closeAlert:(id)sender {
+    [self closePopWindow];
 }
 
--(void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
+-(void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     [self closePopWindow];
 }
 
 - (IBAction)showAnswerAction:(id)sender {
     _clickButton.userInteractionEnabled = NO;
     _solveButton.userInteractionEnabled = NO;
-    //[self rewardedVideoADDidRequest];
     for (UIView* view in _gridview.subviews)
         [view removeFromSuperview];
+    
     [self layoutGrid:self.puzzle.solution];
-    [self countdwonStart];
-    //[alertBackGround removeFromSuperview];
+    
+
+    [self goToResultPage];
 }
 
 
@@ -315,12 +296,10 @@ UITextField *pastTextField;
     rect.origin.x += (self.view.frame.size.width - rect.size.width) / 2 ;
     rect.origin.y += 100 * (self.view.frame.size.width / GUIDELINE_SCREEN_WIDTH);
 
-
     gridview.frame = rect;
     gridview.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:gridview];
-
 }
 
 - (void)appendLog:(NSString *)log {
@@ -342,7 +321,7 @@ UITextField *pastTextField;
 }
 
 - (void) newPuzzleWithSolution: (Solution *) solution {
-    [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
+    //[self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
     Puzzle* puzzle = nil;
 
     if (solution == nil)
@@ -372,7 +351,6 @@ UITextField *pastTextField;
 
 
 - (void) validateGrid {
-    
     checkTime --;
     for (UIView* view in _gridview.subviews) {
         if ([view isKindOfClass:[UITextField class]]) {
@@ -387,11 +365,10 @@ UITextField *pastTextField;
         }
     }
     
-    [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
+    //[self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
 }
 
--(void) checkComplete
-{
+-(void) checkComplete {
     Boolean isComplete = TRUE;
     for (UIView* view in _gridview.subviews) {
             int tag = (int) view.tag;
@@ -401,8 +378,7 @@ UITextField *pastTextField;
                             break;
             }
         }
-    if(isComplete)
-    {
+    if(isComplete) {
         [self newPuzzle];
         [self closeAlert:self];
         checkTime = TOTAL_CHECK_TIMES;
@@ -411,7 +387,6 @@ UITextField *pastTextField;
 }
 
 - (void) layoutGrid: (Solution*) solutionToShow {
-
     UIView* gridview = _gridview;
     CGRect rect = _gridview.frame;
 
@@ -422,7 +397,6 @@ UITextField *pastTextField;
     for (int i = 0; i < 9; i++) {
         //cols
         for (int j = 0; j < 9; j++) {
-
             UILabel * label = nil;
 
 #ifndef SHOW_NUMBERS
@@ -497,7 +471,7 @@ UITextField *pastTextField;
               action:@selector(textFieldDidChange:)
     forControlEvents:UIControlEventEditingChanged];
     
-    [label addTarget:self action:@selector(handleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+   // [label addTarget:self action:@selector(handleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     return label;
 }
@@ -519,6 +493,14 @@ UITextField *pastTextField;
         pastTextField.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0].CGColor;
     }
     pastTextField = textField;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
 }
 
 - (void) setSelectedTextFieldColor:(UITextField*)textField {
@@ -574,35 +556,19 @@ UITextField *pastTextField;
 #endif
 }
 
--(void)countdwonStart
-{
-    currMinute = 0;
-    currSeconds = 01;
-    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+-(void)goToResultPage {
+    backFromNewPage = true;
 
-}
--(void)timerFired
-{
-    if((currMinute>0 || currSeconds>=0) && currMinute>=0)
-    {
-        if(currSeconds==0)
-        {
-            currMinute-=1;
-            currSeconds=59;
-        }
-        else if(currSeconds>0)
-        {
-            currSeconds-=1;
-        }
-    }
-    else
-    {
-        backFromNewPage = true;
-        [timer invalidate];
-        checkTime = TOTAL_CHECK_TIMES;
+    checkTime = TOTAL_CHECK_TIMES;
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self performSegueWithIdentifier:@"goToNewPage" sender:self];
-    }
+        NSLog(@"Do some work");
+    });
+    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -616,26 +582,21 @@ UITextField *pastTextField;
  *  @param rewardedVideoAD CERewardedVideoAD instance that own this rewardedVideo ad component
  *  @param error error indicates the fail reason
  */
-- (void)rewardedVideoADDidFail:(CERewardedVideoAD *)rewardedVideoAD withError:(NSError *)error
-{
+- (void)rewardedVideoADDidFail:(CERewardedVideoAD *)rewardedVideoAD withError:(NSError *)error {
     [self appendLog:[NSString stringWithFormat:@"rewardedVideoADDidFail, error : %@", error.description]];;
 }
 
-- (void)rewardedVideoADDidVideoStart:(CERewardedVideoAD *)rewardedVideoAD
-{
+- (void)rewardedVideoADDidVideoStart:(CERewardedVideoAD *)rewardedVideoAD {
     [AudioPlayHandler pauseBackgroundMusic];
     [self appendLog:@"rewardedVideoADDidVideoStart"];
 }
 
-- (void) rewardedVideoADWillDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
-{
+- (void) rewardedVideoADWillDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD {
     [AudioPlayHandler resumeBackgroundMusic];
     [self appendLog:@"rewardedVideoADWillDismiss"];
 }
 
-- (void) rewardedVideoADDidDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD
-{
-    backFromNewPage = true;
+- (void) rewardedVideoADDidDismiss:(nonnull CERewardedVideoAD *)rewardedVideoAD {
 }
 
 /*!
@@ -643,16 +604,14 @@ UITextField *pastTextField;
  * @brief send rewarded viedo request to load ads, and it will display ads while loading successfully.
  *
  */
--(void) rewardedVideoADDidRequest
-{
+-(void) rewardedVideoADDidRequest {
     ceRewardedVideoAD = [[CERewardedVideoAD alloc] initWithPlacement:@"HINT_REWARDED"];
     ceRewardedVideoAD.delegate = self;
     [ceRewardedVideoAD loadAd];
 }
 
 #pragma mark - CERewardedVideoADDelgate
-- (void) rewardedVideoADDidLoaded:(CERewardedVideoAD*)rewardedVideoAD
-{
+- (void) rewardedVideoADDidLoaded:(CERewardedVideoAD*)rewardedVideoAD {
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     while (topController.presentedViewController) {
         topController = topController.presentedViewController;
@@ -666,16 +625,14 @@ UITextField *pastTextField;
  * @brief send splash viedo request to load ads, and it will display ads while loading successfully.
  *
  */
--(void) splashADDidRequest
-{
+-(void) splashADDidRequest {
     ceSplash2AD = [[CESplash2AD alloc] initWithPlacement:@"END_INTERSTITUAL"];
     ceSplash2AD.delegate = self;
     [ceSplash2AD loadAd];
 }
 
 #pragma mark - CESplash2ADDelegate
-- (void)splash2ADDidLoaded:(CESplash2AD*)splash2AD
-{
+- (void)splash2ADDidLoaded:(CESplash2AD*)splash2AD {
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     while (topController.presentedViewController) {
         topController = topController.presentedViewController;
@@ -684,23 +641,20 @@ UITextField *pastTextField;
     [ceSplash2AD showFromViewController:topController animated:YES];
 }
 
-- (void) splash2ADDidVideoStart:(nonnull CESplash2AD *)splash2AD
-{
+- (void) splash2ADDidVideoStart:(nonnull CESplash2AD *)splash2AD {
     [AudioPlayHandler pauseBackgroundMusic];
     [self appendLog:@"splash2ADDidVideoStart"];
     [self.checkTimeView setValue:[NSString stringWithFormat:@"%d",checkTime] forKey:@"text"];
 }
 
-- (void) splash2ADWillDismiss:(nonnull CESplash2AD *)splash2AD
-{
+- (void) splash2ADWillDismiss:(nonnull CESplash2AD *)splash2AD {
     [AudioPlayHandler resumeBackgroundMusic];
     [self appendLog:@"splash2ADWillDismiss"];
 }
 
 
 #ifdef ENABLE_TEXT_FILTERING
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([string isEqualToString:@"0"]) {
         textField.text = nil;
         return NO;
@@ -721,7 +675,6 @@ UITextField *pastTextField;
 }
 
 @end
-
 
 
 void drawLine(int x1, int y1, int x2, int y2) {

@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "watchad.png",
+      "filename" : "icon_watchads_hover.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "watchad@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "watchad@3x.png",
       "scale" : "3x"
     }
   ],
